@@ -1193,6 +1193,7 @@
       }
 
       if (taskObj && taskObj.lock) {
+        state.lockOwnerTaskId = id;
         const lockMsg = applySmartWaterLock(id, taskObj.eatMins || 0, taskObj.lock, !!state.manualTimeSet[id]);
         toastParts.push(lockMsg);
       }
@@ -1210,11 +1211,22 @@
         state.water = Math.max(0, state.water - taskWater);
         renderWater();
       }
+      if (taskObj && taskObj.lock && (!state.lockOwnerTaskId || state.lockOwnerTaskId === id)) {
+        state.eatEnd = null;
+        state.lockEnd = null;
+        state.lockOwnerTaskId = null;
+        updateLockUI();
+        toastParts.push("🔓 تم إلغاء قفل المي");
+      }
+      if (toastParts.length > 0) {
+        showToast(toastParts.join(" | "));
+      }
     }
 
     saveState();
     renderTasks();
   }
+  
 
   function renderTasks() {
     const list = document.getElementById("tasksList");
