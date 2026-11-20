@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#0b0f17" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>برنامجي الصحي | 108.6 كغ</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2310b981'/%3E%3Ctext x='50' y='67' font-size='52' text-anchor='middle' fill='%230b0f17' font-family='sans-serif' font-weight='bold'%3E108%3C/text%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2310b981'/%3E%3Ctext x='50' y='67' font-size='52' text-anchor='middle' fill='%230b0f17' font-family='sans-serif' font-weight='bold'%3E108%3C/text%3E%3C/svg%3E" />
+  <title>برنامجي الصحي | متابعة ذكية</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2310b981'/%3E%3Ctext x='50' y='67' font-size='48' text-anchor='middle' fill='%230b0f17' font-family='sans-serif' font-weight='bold'%3EPRO%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2310b981'/%3E%3Ctext x='50' y='67' font-size='48' text-anchor='middle' fill='%230b0f17' font-family='sans-serif' font-weight='bold'%3EPRO%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
       --bg: #0b0f17;
@@ -32,20 +32,33 @@
     body { background: var(--bg); color: var(--text); padding-bottom: 88px; line-height: 1.5; }
     .container { max-width: 520px; margin: 0 auto; padding: 12px; }
 
-    /* Permission & Calendar Export Bar */
-    .alert-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 10px; }
-    .perm-btn { background: var(--amber-dim); border: 1px solid rgba(245,158,11,0.4); color: var(--amber); padding: 8px 10px; border-radius: 11px; font-size: 11px; font-weight: 800; text-align: center; cursor: pointer; }
-    .perm-btn.active { background: var(--green-dim); border-color: rgba(16,185,129,0.35); color: var(--green); }
-    .cal-export-btn { background: var(--blue-dim); border: 1px solid rgba(56,189,248,0.4); color: var(--blue); padding: 8px 10px; border-radius: 11px; font-size: 11px; font-weight: 800; text-align: center; cursor: pointer; }
+    /* Top Alerts & Cloud Sync Strip */
+    .alert-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+    .strip-btn { background: var(--card-2); border: 1px solid var(--border); color: var(--text); padding: 8px 6px; border-radius: 11px; font-size: 11px; font-weight: 800; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .strip-btn.warn { background: var(--amber-dim); border-color: rgba(245,158,11,0.4); color: var(--amber); }
+    .strip-btn.active { background: var(--green-dim); border-color: rgba(16,185,129,0.4); color: var(--green); }
+    .strip-btn.blue { background: var(--blue-dim); border-color: rgba(56,189,248,0.4); color: var(--blue); }
 
-    /* Header & Mode Switcher */
+    /* Header & History Navigator */
     .header { background: var(--card); padding: 12px 14px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 12px; }
-    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .header h1 { font-size: 17px; font-weight: 800; color: var(--text); }
-    .header .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .date-nav { display: flex; align-items: center; justify-content: space-between; background: #090d14; padding: 5px 8px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 10px; gap: 6px; }
+    .date-nav-btn { background: var(--card-2); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; border-radius: 7px; font-size: 11px; font-weight: 800; cursor: pointer; }
+    .date-nav-btn:disabled { opacity: 0.35; cursor: default; }
+    .date-label { font-size: 12px; font-weight: 800; color: var(--blue); text-align: center; flex: 1; }
     .mode-pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #090d14; padding: 4px; border-radius: 11px; border: 1px solid var(--border); }
     .mode-btn { background: none; border: none; color: var(--muted); padding: 7px 4px; border-radius: 8px; font-size: 11px; font-weight: 800; cursor: pointer; }
     .mode-btn.active { background: var(--card-2); color: var(--green); border: 1px solid rgba(16,185,129,0.35); }
+
+    /* Next Station Focus Card */
+    .next-card { background: linear-gradient(135deg, rgba(16,185,129,0.14), rgba(56,189,248,0.1)); border: 1px solid rgba(16,185,129,0.4); border-radius: 16px; padding: 12px 14px; margin-bottom: 12px; }
+    .next-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .next-badge { font-size: 11px; font-weight: 900; color: var(--green); background: rgba(16,185,129,0.18); padding: 2px 9px; border-radius: 999px; }
+    .next-countdown { font-size: 12px; font-weight: 800; color: var(--amber); }
+    .next-title { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
+    .next-sub { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+    .next-actions { display: grid; grid-template-columns: 2fr 1fr; gap: 8px; }
 
     /* Cards */
     .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px; margin-bottom: 12px; }
@@ -62,6 +75,7 @@
     .btn-green { background: var(--green); color: #062118; border: none; }
     .btn-red { background: var(--red-dim); color: var(--red); border-color: rgba(239,68,68,0.35); }
     .btn-amber { background: var(--amber-dim); color: var(--amber); border-color: rgba(245,158,11,0.35); }
+    .btn-purple { background: var(--purple-dim); color: var(--purple); border-color: rgba(167,139,250,0.35); }
     .btn-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
     .btn-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 
@@ -74,11 +88,12 @@
     .timer-sub { font-size: 11px; opacity: 0.9; font-weight: 700; }
 
     /* Checklist */
-    .task-item { display: flex; align-items: flex-start; gap: 9px; padding: 10px; background: var(--card-2); border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--border); }
+    .task-item { display: flex; align-items: flex-start; gap: 9px; padding: 10px; background: var(--card-2); border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--border); transition: border-color 0.3s, box-shadow 0.3s; }
     .task-item.meal-task { border-right: 3px solid var(--green); }
     .task-item.prayer-task { border-right: 3px solid var(--purple); align-items: center; cursor: pointer; }
-    .task-item.done { opacity: 0.58; border-color: rgba(16,185,129,0.25); }
+    .task-item.done { opacity: 0.56; border-color: rgba(16,185,129,0.25); }
     .task-item.done .task-text { text-decoration: line-through; }
+    .task-item.highlight-pulse { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(56,189,248,0.35); }
     .checkbox { width: 25px; height: 25px; border-radius: 7px; border: 2px solid var(--muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: bold; margin-top: 1px; cursor: pointer; }
     .task-item.done .checkbox { background: var(--green); border-color: var(--green); color: #062118; }
     .time-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
@@ -96,9 +111,10 @@
     .edit-water-btn { font-size: 10px; font-weight: 800; color: var(--blue); background: var(--blue-dim); border: 1px solid rgba(56,189,248,0.4); padding: 2px 8px; border-radius: 6px; cursor: pointer; }
 
     /* Inputs */
-    select, input { width: 100%; background: #090d14; border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 11px; font-size: 14px; outline: none; }
-    select:focus, input:focus { border-color: var(--green); }
+    select, input, textarea { width: 100%; background: #090d14; border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 11px; font-size: 14px; outline: none; }
+    select:focus, input:focus, textarea:focus { border-color: var(--green); }
     .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .form-row-eq { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
 
     /* Category Switch */
     .cat-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: #090d14; padding: 4px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border); }
@@ -115,6 +131,9 @@
     .meal-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 10px; background: var(--card-2); border-radius: 10px; margin-bottom: 6px; font-size: 13px; }
     .del-btn { background: none; border: none; color: var(--red); font-size: 18px; font-weight: bold; cursor: pointer; padding: 0 6px; }
 
+    /* Chart Box */
+    .chart-wrap { background: #090d14; border: 1px solid var(--border); border-radius: 12px; padding: 10px; margin-top: 10px; }
+
     /* Bottom Nav */
     .nav { position: fixed; bottom: 0; left: 0; right: 0; background: #0f1623; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 4px 12px; z-index: 50; }
     .nav-btn { background: none; border: none; color: var(--muted); font-size: 11px; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; flex: 1; }
@@ -128,15 +147,16 @@
 
     /* Modals */
     .modal-overlay { position: fixed; inset: 0; background: rgba(5, 8, 15, 0.9); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 200; overflow-y: auto; }
-    .modal-card { background: var(--card); border: 2px solid var(--amber); border-radius: 20px; padding: 18px; width: 100%; max-width: 430px; text-align: center; box-shadow: 0 12px 40px rgba(0,0,0,0.75); }
+    .modal-card { background: var(--card); border: 2px solid var(--amber); border-radius: 20px; padding: 18px; width: 100%; max-width: 440px; text-align: center; box-shadow: 0 12px 40px rgba(0,0,0,0.75); max-height: 92vh; overflow-y: auto; }
     .modal-card.pulse { animation: pulseBorder 1.5s infinite; }
     @keyframes pulseBorder { 0%, 100% { border-color: var(--amber); } 50% { border-color: var(--green); } }
     .modal-icon { font-size: 40px; margin-bottom: 6px; }
     .modal-title { font-size: 17px; font-weight: 900; margin-bottom: 6px; color: var(--text); }
-    .modal-desc { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
-    .ing-row { display: grid; grid-template-columns: 2fr 80px 30px; gap: 6px; align-items: center; background: var(--card-2); padding: 7px 9px; border-radius: 10px; margin-bottom: 6px; text-align: right; font-size: 12px; }
+    .modal-desc { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+    .ing-row { display: grid; grid-template-columns: 2fr 78px 28px; gap: 6px; align-items: center; background: var(--card-2); padding: 7px 9px; border-radius: 10px; margin-bottom: 6px; text-align: right; font-size: 12px; }
     .ing-row input { padding: 6px 8px; font-size: 13px; text-align: center; }
-    .preset-ml-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
+    .preset-ml-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 10px; }
+    .code-box { background: #060910; border: 1px solid var(--border); border-radius: 10px; padding: 10px; font-family: monospace; font-size: 10px; color: #a5f3fc; text-align: left; direction: ltr; max-height: 140px; overflow-y: auto; white-space: pre; margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -172,13 +192,24 @@
   </div>
 </div>
 
-<!-- 3. Meal Customizer Modal -->
+<!-- 3. Meal Customizer & Saved Presets Modal -->
 <div id="mealEditModal" class="modal-overlay">
   <div class="modal-card" style="border-color: var(--green); text-align: right;">
     <div class="modal-title" style="text-align:center;" id="mealEditTitle">تخصيص أصناف وأوزان الوجبة</div>
-    <div id="mealIngredientsList" style="max-height: 230px; overflow-y: auto; margin-bottom: 10px;"></div>
 
-    <div style="border-top: 1px solid var(--border); padding-top: 10px; margin-bottom: 10px;">
+    <!-- Saved Presets Bar -->
+    <div style="background:#090d14; border:1px solid var(--border); padding:8px; border-radius:11px; margin-bottom:10px;">
+      <div style="font-size:11px; color:var(--purple); font-weight:800; margin-bottom:5px;">📂 قوالب محفوظة جاهزة:</div>
+      <div style="display:grid; grid-template-columns: 1fr auto auto; gap:5px;">
+        <select id="presetSelect" style="padding:7px 8px; font-size:12px;"></select>
+        <button class="btn btn-purple" style="padding:6px 10px; font-size:11px;" onclick="applySelectedPreset()">تطبيق</button>
+        <button class="btn btn-red" style="padding:6px 9px; font-size:11px;" onclick="deleteSelectedPreset()">🗑️</button>
+      </div>
+    </div>
+
+    <div id="mealIngredientsList" style="max-height: 200px; overflow-y: auto; margin-bottom: 10px;"></div>
+
+    <div style="border-top: 1px solid var(--border); padding-top: 9px; margin-bottom: 9px;">
       <div style="font-size: 11px; color: var(--muted); margin-bottom: 5px;">➕ إضافة أو تبديل صنف في هذه الوجبة:</div>
       <div class="form-row">
         <select id="mealAddSelect"></select>
@@ -188,19 +219,20 @@
     </div>
 
     <div id="mealEditSummary" class="preview-pill">الإجمالي: 0 سعرة | 0 غ بروتين</div>
+    <button class="btn btn-purple" style="width:100%; padding:8px; font-size:12px; margin-bottom:8px;" onclick="saveCurrentAsPreset()">💾 حفظ هذه التوليفة كقالب دائم</button>
     <div class="btn-grid-2">
-      <button class="btn btn-green" onclick="saveMealCustomization()">حفظ التعديل</button>
+      <button class="btn btn-green" onclick="saveMealCustomization()">اعتماد لليوم</button>
       <button class="btn" onclick="closeMealEdit()">إلغاء</button>
     </div>
   </div>
 </div>
 
-<!-- 4. Water Amount Edit Modal -->
+<!-- 4. Water Amount Edit Modal (Includes 50ml & 100ml) -->
 <div id="waterEditModal" class="modal-overlay">
   <div class="modal-card" style="border-color: var(--blue);">
     <div class="modal-title" id="waterEditTitle">تعديل كمية الماء (مل)</div>
     <div class="modal-desc">اختر الكمية التي شربتها فعلياً في هذه المحطة:</div>
-    <div class="preset-ml-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="preset-ml-grid">
       <button class="btn btn-blue" onclick="setQuickWaterVal(50)">50 مل</button>
       <button class="btn btn-blue" onclick="setQuickWaterVal(100)">100 مل</button>
       <button class="btn btn-blue" onclick="setQuickWaterVal(150)">150 مل</button>
@@ -218,26 +250,72 @@
   </div>
 </div>
 
-<div class="container">
-  <!-- Alerts & Native Calendar Export Strip -->
-  <div class="alert-strip">
-    <div id="permBanner" class="perm-btn" onclick="enableAlertsAndAudio()">
-      🔔 تفعيل صوت الإشعارات
+<!-- 5. Cloud Telegram Background Push Modal -->
+<div id="tgModal" class="modal-overlay">
+  <div class="modal-card" style="border-color: var(--blue); text-align: right;">
+    <div class="modal-title" style="text-align:center;">✈️ تنبيهات تيليغرام السحابية بالخلفية</div>
+    <div class="modal-desc" style="text-align:center;">يُرسل التطبيق جدول مهامك وأي تزحيف جديد تلقائياً للسحابة ليصلك إشعار تيليغرام في الدقيقة المحددة حتى لو كان التطبيق مغلقاً تماماً.</div>
+
+    <div style="margin-bottom:8px;">
+      <label style="font-size:11px; color:var(--muted);">1. توكن البوت (Telegram Bot Token):</label>
+      <input type="text" id="tgBotToken" placeholder="123456789:ABCdefGHI..." style="direction:ltr; text-align:left; font-size:12px;" />
     </div>
-    <div class="cal-export-btn" onclick="exportScheduleICS()">
-      📅 تصدير للتقويم (تنبيه مضمون)
+    <div style="margin-bottom:8px;">
+      <label style="font-size:11px; color:var(--muted);">2. رقم المحادثة (Chat ID):</label>
+      <input type="text" id="tgChatId" placeholder="987654321" style="direction:ltr; text-align:left; font-size:12px;" />
+    </div>
+    <div style="margin-bottom:10px;">
+      <label style="font-size:11px; color:var(--muted);">3. رابط السكربت السحابي (Google Apps Script Web App URL):</label>
+      <input type="url" id="tgWebhookUrl" placeholder="https://script.google.com/macros/s/.../exec" style="direction:ltr; text-align:left; font-size:12px;" />
+    </div>
+
+    <div class="btn-grid-2" style="margin-bottom:10px;">
+      <button class="btn btn-green" onclick="saveTelegramConfig()">💾 حفظ ومزامنة الآن</button>
+      <button class="btn btn-blue" onclick="testTelegramMessage()">🔔 إرسال رسالة تجريبية</button>
+    </div>
+
+    <details style="background:#090d14; border:1px solid var(--border); border-radius:10px; padding:8px; margin-bottom:10px;">
+      <summary style="font-size:11px; font-weight:800; color:var(--amber); cursor:pointer;">📋 كود الربط السحابي المجاني (Google Apps Script)</summary>
+      <p style="font-size:11px; color:var(--muted); margin-top:5px;">افتح <strong>script.google.com</strong> $\leftarrow$ مشروع جديد $\leftarrow$ الصق الكود $\leftarrow$ انشره كـ Web App (Anyone) + فعّل مشغّل زمني (Trigger) كل دقيقة لدالة <code>checkAlarms</code>:</p>
+      <button class="btn btn-amber" style="width:100%; padding:6px; font-size:11px; margin-top:6px;" onclick="copyGasSnippet()">📋 نسخ كود السكربت</button>
+      <pre id="gasCodeSnippet" class="code-box"></pre>
+    </details>
+
+    <button class="btn" style="width:100%;" onclick="closeTelegramModal()">إغلاق</button>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Top Strip: Sound, Cloud Push, Calendar Export -->
+  <div class="alert-strip">
+    <div id="permBanner" class="strip-btn warn" onclick="enableAlertsAndAudio()">
+      🔔 تفعيل الصوت
+    </div>
+    <div id="tgStatusBadge" class="strip-btn" onclick="openTelegramModal()">
+      ✈️ تنبيه تيليغرام
+    </div>
+    <div class="strip-btn blue" onclick="exportScheduleICS()">
+      📅 تصدير للتقويم
     </div>
   </div>
 
-  <!-- Header & Program Mode Switcher -->
+  <!-- Header, History Navigator & Program Switcher -->
   <div class="header">
     <div class="header-top">
       <div>
         <h1>متابع البرنامج الصحي</h1>
-        <div class="sub" id="dateDisplay">جاري التحميل...</div>
       </div>
       <span id="activeTargetBadge" style="font-size:11px; font-weight:800; color:var(--green); background:var(--green-dim); padding:4px 9px; border-radius:999px;">3,250 مل</span>
     </div>
+
+    <!-- Date History Navigator -->
+    <div class="date-nav">
+      <button class="date-nav-btn" onclick="changeViewingDate(-1)">◀ السابق</button>
+      <div class="date-label" id="dateDisplay">جاري التحميل...</div>
+      <button id="todayJumpBtn" class="date-nav-btn" style="display:none; color:var(--green);" onclick="jumpToToday()">اليوم</button>
+      <button id="nextDayBtn" class="date-nav-btn" onclick="changeViewingDate(1)">التالي ▶</button>
+    </div>
+
     <div class="mode-pills">
       <button id="mode-gym" class="mode-btn" onclick="switchDayMode('gym')">💪 أيام النادي</button>
       <button id="mode-sat" class="mode-btn" onclick="switchDayMode('sat')">🏋️ السبت (2 ظ)</button>
@@ -245,8 +323,22 @@
     </div>
   </div>
 
-  <!-- TAB 1: TODAY (WATER + LOCK + FULL SCHEDULE) -->
+  <!-- TAB 1: TODAY (NEXT STATION + WATER LOCK + HYDRATION + SCHEDULE) -->
   <div id="tab-today" class="tab-content active">
+
+    <!-- Smart Focus: Next Pending Station Card -->
+    <div id="nextStationCard" class="next-card">
+      <div class="next-top">
+        <span class="next-badge" id="nextStationBadge">⚡ المحطة القادمة</span>
+        <span class="next-countdown" id="nextStationCountdown">--</span>
+      </div>
+      <div class="next-title" id="nextStationTitle">جاري التحميل...</div>
+      <div class="next-sub" id="nextStationSub"></div>
+      <div class="next-actions">
+        <button id="nextStationDoneBtn" class="btn btn-green" style="padding:8px 10px; font-size:12px;" onclick="completeNextStation()">✅ إنجاز الآن</button>
+        <button id="nextStationScrollBtn" class="btn btn-blue" style="padding:8px 10px; font-size:12px;" onclick="scrollToNextStation()">📍 انتقال</button>
+      </div>
+    </div>
 
     <!-- Water Lock Timer -->
     <div class="card">
@@ -385,18 +477,37 @@
     </div>
   </div>
 
-  <!-- TAB 4: WEIGHT, OFFSET & REPORT -->
+  <!-- TAB 4: WEIGHT, CHART, BACKUP & REPORT -->
   <div id="tab-tools" class="tab-content">
-    <!-- Weight Tracker -->
+    <!-- Weight Tracker & Editable Goal -->
     <div class="card">
       <div class="card-title">
-        <span>⚖️ متابعة الوزن (هدف السبت: 108.6 كغ)</span>
+        <span>⚖️ متابعة الوزن والهدف الأسبوعي</span>
       </div>
-      <div class="form-row">
-        <input type="number" step="0.1" id="weightInput" placeholder="وزنك الصباحي (مثلاً 109.2)" />
-        <button class="btn btn-green" onclick="saveWeight()">حفظ</button>
+      <div class="form-row-eq">
+        <div>
+          <label style="font-size:11px; color:var(--muted);">وزنك الصباحي (كغ):</label>
+          <input type="number" step="0.1" id="weightInput" placeholder="مثلاً 109.2" />
+        </div>
+        <div>
+          <label style="font-size:11px; color:var(--muted);">الهدف الأسبوعي (كغ):</label>
+          <input type="number" step="0.1" id="targetWeightInput" placeholder="108.6" />
+        </div>
       </div>
-      <div id="weightDiffText" style="font-size:13px; color:var(--muted); margin-top:4px;">أدخل وزنك الصباحي بعد دخول الحمام وقبل الشرب.</div>
+      <button class="btn btn-green" style="width:100%; margin-bottom:8px;" onclick="saveWeightAndGoal()">💾 حفظ الوزن والهدف</button>
+      <div id="weightDiffText" style="font-size:13px; color:var(--muted);">أدخل وزنك الصباحي بعد دخول الحمام وقبل الشرب.</div>
+
+      <!-- Interactive SVG Weight Chart -->
+      <div class="chart-wrap">
+        <div style="font-size:11px; font-weight:800; color:var(--blue); margin-bottom:6px;">📈 منحنى تطور الوزن مقارنة بالهدف</div>
+        <div id="weightChartBox"></div>
+      </div>
+    </div>
+
+    <!-- 7-Day Adherence Summary -->
+    <div class="card">
+      <div class="card-title"><span>📊 ملخص الالتزام لآخر 7 أيام</span></div>
+      <div id="weeklyStatsBox" class="macro-grid"></div>
     </div>
 
     <!-- Emergency Offset Calculator -->
@@ -412,11 +523,16 @@
       <div id="offsetLogList" style="margin-top:8px;"></div>
     </div>
 
-    <!-- Export & Reset -->
+    <!-- Export, Backup & Reset -->
     <div class="card">
-      <div class="card-title"><span>📤 مشاركة التقرير وإدارة اليوم</span></div>
+      <div class="card-title"><span>📤 التقرير والنسخ الاحتياطي</span></div>
       <button class="btn btn-blue" style="width:100%; margin-bottom:8px;" onclick="copyDailyReport()">📋 نسخ تقرير اليوم (للصقه في المحادثة)</button>
-      <button class="btn btn-red" style="width:100%;" onclick="resetToday()">🔄 تصفير بيانات اليوم وبدء يوم جديد</button>
+      <div class="btn-grid-2" style="margin-bottom:8px;">
+        <button class="btn btn-purple" style="font-size:12px;" onclick="exportBackupJSON()">📥 تصدير نسخة (JSON)</button>
+        <button class="btn" style="font-size:12px;" onclick="document.getElementById('importFileInput').click()">📤 استعادة نسخة (JSON)</button>
+      </div>
+      <input type="file" id="importFileInput" accept=".json" style="display:none;" onchange="importBackupJSON(event)" />
+      <button class="btn btn-red" style="width:100%;" onclick="resetToday()">🔄 تصفير بيانات اليوم الحالي فقط</button>
     </div>
   </div>
 </div>
@@ -479,7 +595,7 @@
 
   const ALL_FOOD_ITEMS = [...SAVORY_FOODS.filter(x => !x.custom), ...SWEET_DAIRY_FOODS].sort((a, b) => a.name.localeCompare(b.name, "ar"));
 
-  // 3. البرامج التلاتة (eatMins = مدة تناول الوجبة بالدقائق قبل بدء عداد قفل الماء)
+  // 3. البرامج التلاتة المعتمدة
   const PROGRAMS = {
     gym: {
       label: "أيام النادي (تمرين 7:05 م)",
@@ -714,40 +830,107 @@
     { id: "se_witr", text: "صلاة الوتر — خيار 2 (أدنى الكمال 3 ركعات: ركعتان + ركعة)" }
   ];
 
-  const todayKey = "aburaslan_fit_v5_" + new Date().toLocaleDateString("en-CA");
-  const dow = new Date().getDay(); // 0=Sun, 4=Thu, 6=Sat
-  const defaultMode = dow === 6 ? "sat" : (dow === 0 || dow === 4) ? "rest" : "gym";
+  // Dynamic Date & Auto-Rollover State
+  const STORAGE_PREFIX = "aburaslan_fit_v6_";
+  function getTodayDateStr() {
+    return new Date().toLocaleDateString("en-CA");
+  }
 
-  let state = JSON.parse(localStorage.getItem(todayKey)) || {
-    dayMode: defaultMode,
-    water: 0,
-    tasks: {},
-    taskTimes: {},
-    manualTimeSet: {},
-    completedAt: {},
-    customMeals: {},
-    customWater: {},
-    snoozeUntil: {},
-    alarmFired: {},
-    prayers: {},
-    meals: [],
-    offsets: [],
-    eatEnd: null,
-    lockEnd: null,
-    weight: localStorage.getItem("aburaslan_last_weight") || ""
-  };
+  let currentTodayStr = getTodayDateStr();
+  let viewingDateStr = currentTodayStr;
 
-  if (!state.dayMode) state.dayMode = defaultMode;
-  if (!state.taskTimes) state.taskTimes = {};
-  if (!state.manualTimeSet) state.manualTimeSet = {};
-  if (!state.completedAt) state.completedAt = {};
-  if (!state.customMeals) state.customMeals = {};
-  if (!state.customWater) state.customWater = {};
-  if (!state.snoozeUntil) state.snoozeUntil = {};
-  if (!state.alarmFired) state.alarmFired = {};
+  function getDefaultModeForDate(dateStr) {
+    const [y, m, d] = dateStr.split("-").map(Number);
+    const dow = new Date(y, m - 1, d).getDay();
+    return dow === 6 ? "sat" : (dow === 0 || dow === 4) ? "rest" : "gym";
+  }
+
+  function createEmptyDayState(dateStr) {
+    return {
+      dayMode: getDefaultModeForDate(dateStr),
+      water: 0,
+      tasks: {},
+      taskTimes: {},
+      manualTimeSet: {},
+      completedAt: {},
+      customMeals: {},
+      customWater: {},
+      snoozeUntil: {},
+      alarmFired: {},
+      prayers: {},
+      meals: [],
+      offsets: [],
+      eatEnd: null,
+      lockEnd: null,
+      lockOwnerTaskId: null,
+      weight: ""
+    };
+  }
+
+  function loadDayState(dateStr) {
+    const raw = localStorage.getItem(STORAGE_PREFIX + dateStr);
+    const base = createEmptyDayState(dateStr);
+    if (!raw) return base;
+    try {
+      return Object.assign(base, JSON.parse(raw));
+    } catch (e) {
+      return base;
+    }
+  }
+
+  let state = loadDayState(viewingDateStr);
 
   function saveState() {
-    localStorage.setItem(todayKey, JSON.stringify(state));
+    localStorage.setItem(STORAGE_PREFIX + viewingDateStr, JSON.stringify(state));
+  }
+
+  function isViewingToday() {
+    return viewingDateStr === currentTodayStr;
+  }
+
+  // Auto-Day Rollover Check (Fixes Midnight PWA Suspension Bug)
+  function checkAutoDayRollover() {
+    const realToday = getTodayDateStr();
+    if (realToday !== currentTodayStr) {
+      const wasOnYesterday = viewingDateStr === currentTodayStr;
+      currentTodayStr = realToday;
+      if (wasOnYesterday) {
+        viewingDateStr = realToday;
+        state = loadDayState(viewingDateStr);
+        renderAll(true);
+        syncScheduleToCloud();
+        showToast("🌅 بدأ يوم جديد — تم تحديث الجدول تلقائياً");
+      } else {
+        renderDateHeader();
+      }
+    }
+  }
+
+  // History Navigation
+  function changeViewingDate(deltaDays) {
+    const [y, m, d] = viewingDateStr.split("-").map(Number);
+    const dt = new Date(y, m - 1, d + deltaDays);
+    const nextStr = dt.toLocaleDateString("en-CA");
+    if (nextStr > currentTodayStr) return;
+    viewingDateStr = nextStr;
+    state = loadDayState(viewingDateStr);
+    renderAll(false);
+  }
+
+  function jumpToToday() {
+    viewingDateStr = currentTodayStr;
+    state = loadDayState(viewingDateStr);
+    renderAll(true);
+  }
+
+  function renderDateHeader() {
+    const [y, m, d] = viewingDateStr.split("-").map(Number);
+    const dt = new Date(y, m - 1, d);
+    const formatted = dt.toLocaleDateString("ar-EG", { weekday: "long", month: "short", day: "numeric" });
+    const label = isViewingToday() ? `اليوم • ${formatted}` : `سجل سابق • ${formatted}`;
+    document.getElementById("dateDisplay").textContent = label;
+    document.getElementById("todayJumpBtn").style.display = isViewingToday() ? "none" : "inline-block";
+    document.getElementById("nextDayBtn").disabled = isViewingToday();
   }
 
   function getActiveProgram() {
@@ -769,7 +952,8 @@
     state.snoozeUntil = {};
     state.alarmFired = {};
     saveState();
-    renderAll();
+    renderAll(false);
+    syncScheduleToCloud();
     showToast(`تم التبديل إلى: ${PROGRAMS[mode].label}`);
   }
 
@@ -810,7 +994,6 @@
     const key = `${state.dayMode}_${editingWaterTaskId}`;
     state.customWater[key] = newVal;
 
-    // If task is already completed, adjust total water counter by the difference
     if (state.tasks[editingWaterTaskId]) {
       state.water = Math.max(0, state.water + (newVal - oldVal));
       renderWater();
@@ -818,6 +1001,7 @@
 
     saveState();
     renderTasks();
+    renderNextStationCard();
     closeWaterEdit();
     showToast(`تم تحديث كمية الماء إلى ${newVal} مل`);
   }
@@ -885,14 +1069,85 @@
     return `intent:#Intent;action=android.intent.action.SET_ALARM;i.android.intent.extra.alarm.HOUR=${h};i.android.intent.extra.alarm.MINUTES=${m};S.android.intent.extra.alarm.MESSAGE=${encodeURIComponent(label)};B.android.intent.extra.alarm.SKIP_UI=false;end`;
   }
 
-  // Export Today's Schedule as .ICS Calendar File (Guaranteed native alarms on S25 Ultra!)
-  function exportScheduleICS() {
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, "0");
-    const dd = String(now.getDate()).padStart(2, "0");
-    const datePrefix = `${yyyy}${mm}${dd}`;
+  // Smart Focus: Next Pending Station Card & Auto-Scroll
+  let currentNextTaskId = null;
+
+  function renderNextStationCard() {
+    const card = document.getElementById("nextStationCard");
+    if (!isViewingToday()) {
+      card.style.display = "none";
+      return;
+    }
+    const tasks = getActiveProgram().tasks;
+    const nextTask = tasks.find(t => !state.tasks[t.id]);
+    if (!nextTask) {
+      currentNextTaskId = null;
+      card.style.display = "block";
+      document.getElementById("nextStationBadge").textContent = "🎉 اكتمل اليوم";
+      document.getElementById("nextStationCountdown").textContent = "100%";
+      document.getElementById("nextStationTitle").textContent = "أنجزت جميع محطات اليوم بنجاح!";
+      document.getElementById("nextStationSub").textContent = "تقدر تنسخ تقريرك اليومي من تبويب الوزن والتقرير.";
+      document.getElementById("nextStationDoneBtn").style.display = "none";
+      document.getElementById("nextStationScrollBtn").style.display = "none";
+      return;
+    }
+
+    currentNextTaskId = nextTask.id;
+    card.style.display = "block";
+    document.getElementById("nextStationDoneBtn").style.display = "inline-flex";
+    document.getElementById("nextStationScrollBtn").style.display = "inline-flex";
+
+    const schedMins = getTaskMins(nextTask.id);
     const nowMins = getNowMins();
+    const diff = schedMins - nowMins;
+    let countdownTxt = formatMinsArabic(schedMins);
+    if (diff > 0) {
+      const hrs = Math.floor(diff / 60);
+      const mins = diff % 60;
+      countdownTxt = `${formatMinsArabic(schedMins)} (بعد ${hrs > 0 ? hrs + " س و " : ""}${mins} د)`;
+    } else if (diff === 0) {
+      countdownTxt = `${formatMinsArabic(schedMins)} (الآن!)`;
+    } else {
+      countdownTxt = `${formatMinsArabic(schedMins)} (متأخر ${Math.abs(diff)} د)`;
+    }
+
+    const w = getTaskWater(nextTask);
+    let subTxt = nextTask.sub || "";
+    if (nextTask.defaultItems) {
+      const items = getTaskMealItems(nextTask);
+      const totals = calcItemsMacros(items);
+      subTxt = `${formatItemsSummary(items)} (${totals.cal} سعرة)`;
+    } else if (w > 0) {
+      subTxt = `الكمية المحددة: ${w} مل ماء` + (subTxt ? ` • ${subTxt}` : "");
+    }
+
+    document.getElementById("nextStationBadge").textContent = "⚡ المحطة القادمة";
+    document.getElementById("nextStationCountdown").textContent = countdownTxt;
+    document.getElementById("nextStationTitle").textContent = nextTask.text;
+    document.getElementById("nextStationSub").textContent = subTxt;
+  }
+
+  function completeNextStation() {
+    if (currentNextTaskId) {
+      toggleTask(currentNextTaskId, true);
+    }
+  }
+
+  function scrollToNextStation() {
+    if (!currentNextTaskId) return;
+    const el = document.getElementById("task-row-" + currentNextTaskId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.classList.add("highlight-pulse");
+      setTimeout(() => el.classList.remove("highlight-pulse"), 1800);
+    }
+  }
+
+  // Export Today's Schedule as .ICS Calendar File
+  function exportScheduleICS() {
+    const [y, m, d] = viewingDateStr.split("-").map(Number);
+    const datePrefix = `${y}${String(m).padStart(2, "0")}${String(d).padStart(2, "0")}`;
+    const nowMins = isViewingToday() ? getNowMins() : 0;
     const tasks = getActiveProgram().tasks;
 
     let icsLines = [
@@ -906,12 +1161,11 @@
     tasks.forEach(t => {
       if (state.tasks[t.id]) return;
       const mins = getTaskMins(t.id);
-      if (mins < nowMins - 5) return; // Skip already passed tasks
+      if (mins < nowMins - 5) return;
 
       const norm = ((mins % 1440) + 1440) % 1440;
       const hh = String(Math.floor(norm / 60)).padStart(2, "0");
       const minStr = String(norm % 60).padStart(2, "0");
-
       const endNorm = norm + (t.eatMins || 10);
       const endHh = String(Math.floor(endNorm / 60) % 24).padStart(2, "0");
       const endMinStr = String(endNorm % 60).padStart(2, "0");
@@ -937,7 +1191,7 @@
     });
 
     if (count === 0) {
-      showToast("لا توجد مهام قادمة متبقية اليوم للتصدير");
+      showToast("لا توجد مهام قادمة متبقية للتصدير");
       return;
     }
 
@@ -951,7 +1205,7 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    showToast(`تم تنزيل ${count} تنبيهات — افتح الملف لإضافتها للتقويم`);
+    showToast(`تم تنزيل ${count} تنبيهات للتقويم`);
   }
 
   // Shift task and all subsequent tasks
@@ -977,6 +1231,8 @@
     }
     saveState();
     renderTasks();
+    renderNextStationCard();
+    syncScheduleToCloud();
     if (delta > 0) showToast(`تم تزحيف باقي البرنامج +${delta} دقيقة`);
     else if (delta < 0) showToast(`تم تقديم باقي البرنامج ${Math.abs(delta)} دقيقة`);
   }
@@ -989,6 +1245,8 @@
       state.alarmFired = {};
       saveState();
       renderTasks();
+      renderNextStationCard();
+      syncScheduleToCloud();
       showToast("تمت إعادة الساعات الأصلية");
     }
   }
@@ -1019,6 +1277,7 @@
 
       const t = getActiveProgram().tasks.find(x => x.id === editingTaskId);
       if (t && t.lock && state.tasks[editingTaskId]) {
+        state.lockOwnerTaskId = editingTaskId;
         applySmartWaterLock(editingTaskId, t.eatMins || 0, t.lock, true);
       }
       showToast(`تم تثبيت الوقت على ${formatMinsArabic(newMins)}`);
@@ -1026,9 +1285,78 @@
     closeTimeEdit();
   }
 
-  // Meal Customizer Modal Logic
+  // Meal Customizer & Saved Presets Modal
   let editingMealTaskId = null;
   let tempMealItems = [];
+
+  function getSavedPresets() {
+    try {
+      return JSON.parse(localStorage.getItem("aburaslan_meal_presets")) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function setSavedPresets(arr) {
+    localStorage.setItem("aburaslan_meal_presets", JSON.stringify(arr));
+  }
+
+  function populatePresetDropdown() {
+    const sel = document.getElementById("presetSelect");
+    const presets = getSavedPresets();
+    sel.innerHTML = "";
+    if (presets.length === 0) {
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = "لا توجد قوالب محفوظة بعد";
+      sel.appendChild(opt);
+      return;
+    }
+    presets.forEach((p, i) => {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = `${p.name} (${p.cal} سعرة)`;
+      sel.appendChild(opt);
+    });
+  }
+
+  function saveCurrentAsPreset() {
+    const validItems = tempMealItems.filter(it => it.grams > 0);
+    if (validItems.length === 0) return;
+    const presetName = prompt("اكتب اسماً لهذا القالب (مثلاً: غداء لحم 200غ + 150غ برغل):");
+    if (!presetName || !presetName.trim()) return;
+    const totals = calcItemsMacros(validItems);
+    const presets = getSavedPresets();
+    presets.push({
+      name: presetName.trim(),
+      cal: totals.cal,
+      items: JSON.parse(JSON.stringify(validItems))
+    });
+    setSavedPresets(presets);
+    populatePresetDropdown();
+    showToast(`💾 تم حفظ قالب "${presetName.trim()}"`);
+  }
+
+  function applySelectedPreset() {
+    const idx = document.getElementById("presetSelect").value;
+    if (idx === "") return;
+    const presets = getSavedPresets();
+    const p = presets[parseInt(idx)];
+    if (!p) return;
+    tempMealItems = JSON.parse(JSON.stringify(p.items));
+    renderMealIngredientsEditor();
+    showToast(`تم تطبيق قالب "${p.name}"`);
+  }
+
+  function deleteSelectedPreset() {
+    const idx = document.getElementById("presetSelect").value;
+    if (idx === "") return;
+    const presets = getSavedPresets();
+    const removed = presets.splice(parseInt(idx), 1);
+    setSavedPresets(presets);
+    populatePresetDropdown();
+    if (removed[0]) showToast(`تم حذف قالب "${removed[0].name}"`);
+  }
 
   function openMealEdit(e, taskId) {
     e.stopPropagation();
@@ -1037,6 +1365,8 @@
     if (!t) return;
     document.getElementById("mealEditTitle").textContent = `تخصيص: ${t.text}`;
     tempMealItems = JSON.parse(JSON.stringify(getTaskMealItems(t)));
+
+    populatePresetDropdown();
 
     const sel = document.getElementById("mealAddSelect");
     sel.innerHTML = "";
@@ -1116,6 +1446,7 @@
 
     saveState();
     renderTasks();
+    renderNextStationCard();
     closeMealEdit();
     showToast("تم تحديث أصناف وأوزان الوجبة");
   }
@@ -1141,6 +1472,7 @@
     if (now.getTime() >= lockEndMs) {
       state.eatEnd = null;
       state.lockEnd = null;
+      state.lockOwnerTaskId = null;
       updateLockUI();
       return `✅ وقت قفل المي انتهى أصلاً`;
     }
@@ -1157,7 +1489,7 @@
     }
   }
 
-  // Daily Tasks Toggle
+  // Daily Tasks Toggle (With Lock Cancellation on Uncheck)
   function toggleTask(id, forceDone = null) {
     unlockAudio();
     const newState = forceDone !== null ? forceDone : !state.tasks[id];
@@ -1172,7 +1504,7 @@
       const nowMins = getNowMins();
       state.completedAt[id] = formatMinsArabic(nowMins);
 
-      if (!state.manualTimeSet[id]) {
+      if (isViewingToday() && !state.manualTimeSet[id]) {
         shiftTaskAndFollowing(id, nowMins, false);
       }
 
@@ -1194,7 +1526,7 @@
         renderWater();
       }
 
-      if (taskObj && taskObj.lock) {
+      if (isViewingToday() && taskObj && taskObj.lock) {
         state.lockOwnerTaskId = id;
         const lockMsg = applySmartWaterLock(id, taskObj.eatMins || 0, taskObj.lock, !!state.manualTimeSet[id]);
         toastParts.push(lockMsg);
@@ -1227,8 +1559,10 @@
 
     saveState();
     renderTasks();
+    renderNextStationCard();
+    renderWeeklyStats();
+    syncScheduleToCloud();
   }
-  
 
   function renderTasks() {
     const list = document.getElementById("tasksList");
@@ -1274,6 +1608,7 @@
       }
 
       const div = document.createElement("div");
+      div.id = "task-row-" + t.id;
       div.className = "task-item" + (t.defaultItems ? " meal-task" : "") + (isDone ? " done" : "");
       div.innerHTML = `
         <div class="checkbox" onclick="toggleTask('${t.id}')">${isDone ? "✓" : ""}</div>
@@ -1290,6 +1625,137 @@
     });
 
     document.getElementById("tasksProgress").textContent = `${doneCount}/${tasks.length}`;
+  }
+
+  // Cloud Telegram Push Integration
+  const GAS_TEMPLATE = `function doPost(e) {
+  var data = JSON.parse(e.postData.contents);
+  PropertiesService.getScriptProperties().setProperty("SCHEDULE_PAYLOAD", JSON.stringify(data));
+  return ContentService.createTextOutput("OK");
+}
+
+function checkAlarms() {
+  var raw = PropertiesService.getScriptProperties().getProperty("SCHEDULE_PAYLOAD");
+  if (!raw) return;
+  var payload = JSON.parse(raw);
+  var now = new Date();
+  var today = Utilities.formatDate(now, Session.getScriptTimeZone(), "yyyy-MM-dd");
+  if (payload.date !== today) return;
+  var nowMins = now.getHours() * 60 + now.getMinutes();
+  var sent = JSON.parse(PropertiesService.getScriptProperties().getProperty("SENT_" + today) || "{}");
+
+  payload.tasks.forEach(function(t) {
+    if (!sent[t.id] && nowMins === t.mins) {
+      var url = "https://api.telegram.org/bot" + payload.botToken + "/sendMessage";
+      UrlFetchApp.fetch(url, {
+        method: "post",
+        contentType: "application/json",
+        payload: JSON.stringify({ chat_id: payload.chatId, text: "⏰ موعدك الآن:\\n" + t.text })
+      });
+      sent[t.id] = true;
+    }
+  });
+  PropertiesService.getScriptProperties().setProperty("SENT_" + today, JSON.stringify(sent));
+}`;
+
+  function getTelegramConfig() {
+    try {
+      return JSON.parse(localStorage.getItem("aburaslan_tg_cfg")) || { botToken: "", chatId: "", webhookUrl: "" };
+    } catch (e) {
+      return { botToken: "", chatId: "", webhookUrl: "" };
+    }
+  }
+
+  function updateTelegramBadge() {
+    const cfg = getTelegramConfig();
+    const badge = document.getElementById("tgStatusBadge");
+    if (cfg.botToken && cfg.chatId && cfg.webhookUrl) {
+      badge.className = "strip-btn active";
+      badge.textContent = "✈️ تيليغرام متزامن";
+    } else {
+      badge.className = "strip-btn";
+      badge.textContent = "✈️ تنبيه تيليغرام";
+    }
+  }
+
+  function openTelegramModal() {
+    const cfg = getTelegramConfig();
+    document.getElementById("tgBotToken").value = cfg.botToken || "";
+    document.getElementById("tgChatId").value = cfg.chatId || "";
+    document.getElementById("tgWebhookUrl").value = cfg.webhookUrl || "";
+    document.getElementById("gasCodeSnippet").textContent = GAS_TEMPLATE;
+    document.getElementById("tgModal").style.display = "flex";
+  }
+
+  function closeTelegramModal() {
+    document.getElementById("tgModal").style.display = "none";
+  }
+
+  function copyGasSnippet() {
+    navigator.clipboard.writeText(GAS_TEMPLATE).then(() => showToast("تم نسخ كود السكربت السحابي"));
+  }
+
+  function saveTelegramConfig() {
+    const cfg = {
+      botToken: document.getElementById("tgBotToken").value.trim(),
+      chatId: document.getElementById("tgChatId").value.trim(),
+      webhookUrl: document.getElementById("tgWebhookUrl").value.trim()
+    };
+    localStorage.setItem("aburaslan_tg_cfg", JSON.stringify(cfg));
+    updateTelegramBadge();
+    syncScheduleToCloud(true);
+    closeTelegramModal();
+  }
+
+  function testTelegramMessage() {
+    const botToken = document.getElementById("tgBotToken").value.trim();
+    const chatId = document.getElementById("tgChatId").value.trim();
+    if (!botToken || !chatId) {
+      showToast("أدخل توكن البوت ورقم المحادثة أولاً");
+      return;
+    }
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text: "✅ تم ربط متابع البرنامج الصحي بنجاح! ستصلك التنبيهات هنا في وقتها." })
+    })
+      .then(r => r.json())
+      .then(res => {
+        if (res.ok) showToast("✅ وصلت الرسالة التجريبية إلى تيليغرام!");
+        else showToast("⚠️ تأكد من صحة التوكن و Chat ID");
+      })
+      .catch(() => showToast("⚠️ تعذّر الاتصال بتيليغرام"));
+  }
+
+  function syncScheduleToCloud(manualNotify = false) {
+    if (!isViewingToday()) return;
+    const cfg = getTelegramConfig();
+    if (!cfg.botToken || !cfg.chatId || !cfg.webhookUrl) return;
+
+    const pendingTasks = getActiveProgram().tasks
+      .filter(t => !state.tasks[t.id])
+      .map(t => {
+        const w = getTaskWater(t);
+        return {
+          id: t.id,
+          mins: getTaskMins(t.id),
+          text: `${t.text}${w > 0 ? ` (${w} مل مي)` : ""}`
+        };
+      });
+
+    fetch(cfg.webhookUrl, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify({
+        date: currentTodayStr,
+        botToken: cfg.botToken,
+        chatId: cfg.chatId,
+        tasks: pendingTasks
+      })
+    }).then(() => {
+      if (manualNotify) showToast("✈️ تمت مزامنة جدول اليوم مع السحابة");
+    }).catch(() => {});
   }
 
   // Audio & Repeating Alarm System
@@ -1323,8 +1789,8 @@
   function updatePermBanner() {
     const banner = document.getElementById("permBanner");
     if ("Notification" in window && Notification.permission === "granted") {
-      banner.classList.add("active");
-      banner.textContent = "✅ صوت التنبيه مفعّل (اجعل البطارية غير مقيدة)";
+      banner.className = "strip-btn active";
+      banner.textContent = "✅ الصوت مفعّل";
     }
   }
 
@@ -1427,6 +1893,7 @@
   }
 
   function checkScheduledAlarms() {
+    if (!isViewingToday()) return;
     const now = Date.now();
     const nowMins = getNowMins();
     const tasks = getActiveProgram().tasks;
@@ -1460,6 +1927,7 @@
     const now = Date.now();
     state.eatEnd = eatMins > 0 ? now + eatMins * 60 * 1000 : null;
     state.lockEnd = now + (eatMins + lockMins) * 60 * 1000;
+    state.lockOwnerTaskId = null;
     saveState();
     updateLockUI();
     showToast(`🔒 تم تفعيل قفل الماء لمدة ${lockMins} دقيقة`);
@@ -1468,6 +1936,7 @@
   function cancelWaterLock() {
     state.eatEnd = null;
     state.lockEnd = null;
+    state.lockOwnerTaskId = null;
     saveState();
     updateLockUI();
   }
@@ -1495,9 +1964,10 @@
     if (totalDiff <= 0) {
       state.eatEnd = null;
       state.lockEnd = null;
+      state.lockOwnerTaskId = null;
       saveState();
       updateLockUI();
-      startRepeatingAlarm({ type: "lock" });
+      if (isViewingToday()) startRepeatingAlarm({ type: "lock" });
       return;
     }
 
@@ -1508,7 +1978,6 @@
     cancelBtn.style.display = "block";
     timer.style.display = "block";
 
-    // Phase 1: Eating window before lock starts
     if (state.eatEnd && now < state.eatEnd) {
       const eatDiff = state.eatEnd - now;
       const m = Math.floor(eatDiff / 60000);
@@ -1524,7 +1993,6 @@
       return;
     }
 
-    // Phase 2: Active Water Lock
     const m = Math.floor(totalDiff / 60000);
     const s = Math.floor((totalDiff % 60000) / 1000);
     box.className = "lock-box lock-closed";
@@ -1539,6 +2007,7 @@
     state.water = Math.max(0, state.water + ml);
     saveState();
     renderWater();
+    renderWeeklyStats();
   }
 
   function renderWater() {
@@ -1616,6 +2085,7 @@
     state.meals.push({ name: `${f.name} (${grams}غ)`, cal, pro });
     saveState();
     renderMeals();
+    renderWeeklyStats();
     showToast(`تمت الإضافة (+${cal} سعرة)`);
   }
 
@@ -1625,6 +2095,7 @@
       state.tasks[removed.taskId] = false;
       delete state.completedAt[removed.taskId];
       renderTasks();
+      renderNextStationCard();
     }
     if (removed && removed.offsetId) {
       state.offsets = (state.offsets || []).filter(o => o.id !== removed.offsetId);
@@ -1633,6 +2104,7 @@
     state.meals.splice(i, 1);
     saveState();
     renderMeals();
+    renderWeeklyStats();
   }
 
   function renderMeals() {
@@ -1704,29 +2176,153 @@
     renderPrayerGroup(SUNNAH_EXTRA, "sunnahExtraList", "sunnahExtraProgress");
   }
 
-  // Weight & Offset
-  function saveWeight() {
-    const w = parseFloat(document.getElementById("weightInput").value);
-    if (!w) return;
-    state.weight = w;
-    localStorage.setItem("aburaslan_last_weight", w);
-    saveState();
-    renderWeight();
-    showToast("تم حفظ الوزن");
+  // Weight, Editable Goal & Interactive SVG Chart
+  function getTargetWeight() {
+    const saved = parseFloat(localStorage.getItem("aburaslan_target_weight"));
+    return saved > 0 ? saved : 108.6;
   }
 
-  function renderWeight() {
-    if (!state.weight) return;
-    document.getElementById("weightInput").value = state.weight;
-    const diff = (state.weight - 108.6).toFixed(1);
-    const el = document.getElementById("weightDiffText");
-    if (diff > 0) {
-      el.innerHTML = `الوزن المسجّل: <strong>${state.weight} كغ</strong> — باقي <strong style="color:var(--amber);">${diff} كغ</strong> للوصول لهدف السبت (108.6 كغ).`;
-    } else {
-      el.innerHTML = `الوزن المسجّل: <strong style="color:var(--green);">${state.weight} كغ</strong> — حققت هدف السبت!`;
+  function getWeightHistory() {
+    try {
+      return JSON.parse(localStorage.getItem("aburaslan_weight_history")) || [];
+    } catch (e) {
+      return [];
     }
   }
 
+  function saveWeightAndGoal() {
+    const w = parseFloat(document.getElementById("weightInput").value);
+    const target = parseFloat(document.getElementById("targetWeightInput").value);
+
+    if (target > 0) {
+      localStorage.setItem("aburaslan_target_weight", target);
+    }
+
+    if (w > 0) {
+      state.weight = w;
+      localStorage.setItem("aburaslan_last_weight", w);
+      saveState();
+
+      let hist = getWeightHistory();
+      const idx = hist.findIndex(item => item.date === viewingDateStr);
+      if (idx !== -1) hist[idx].weight = w;
+      else hist.push({ date: viewingDateStr, weight: w });
+      hist.sort((a, b) => a.date.localeCompare(b.date));
+      localStorage.setItem("aburaslan_weight_history", JSON.stringify(hist));
+    }
+
+    renderWeight();
+    showToast("تم حفظ الوزن والهدف");
+  }
+
+  function renderWeight() {
+    const target = getTargetWeight();
+    document.getElementById("targetWeightInput").value = target;
+    const latestW = state.weight || localStorage.getItem("aburaslan_last_weight") || "";
+    if (latestW) {
+      document.getElementById("weightInput").value = latestW;
+      const diff = (parseFloat(latestW) - target).toFixed(1);
+      const el = document.getElementById("weightDiffText");
+      if (diff > 0) {
+        el.innerHTML = `الوزن المسجّل: <strong>${latestW} كغ</strong> — باقي <strong style="color:var(--amber);">${diff} كغ</strong> للوصول للهدف (${target} كغ).`;
+      } else {
+        el.innerHTML = `الوزن المسجّل: <strong style="color:var(--green);">${latestW} كغ</strong> — حققت الهدف (${target} كغ)!`;
+      }
+    }
+    renderWeightChart();
+  }
+
+  function renderWeightChart() {
+    const box = document.getElementById("weightChartBox");
+    const hist = getWeightHistory().slice(-10);
+    const target = getTargetWeight();
+
+    if (hist.length === 0) {
+      box.innerHTML = `<div style="font-size:11px; color:var(--muted); text-align:center; padding:16px 0;">سجّل وزنك الصباحي ليظهر الرسم البياني لتطورك هنا</div>`;
+      return;
+    }
+
+    const W = 320, H = 135, padX = 28, padY = 22;
+    const allVals = hist.map(h => h.weight).concat([target]);
+    const minVal = Math.min(...allVals) - 0.5;
+    const maxVal = Math.max(...allVals) + 0.5;
+    const range = Math.max(0.5, maxVal - minVal);
+
+    const getX = (i) => hist.length === 1 ? W / 2 : padX + (i / (hist.length - 1)) * (W - padX * 2);
+    const getY = (val) => H - padY - ((val - minVal) / range) * (H - padY * 2);
+
+    const targetY = getY(target);
+    let pointsStr = "";
+    let dotsHtml = "";
+
+    hist.forEach((pt, i) => {
+      const cx = getX(i);
+      const cy = getY(pt.weight);
+      pointsStr += `${cx},${cy} `;
+      const shortDate = pt.date.slice(5);
+      dotsHtml += `
+        <circle cx="${cx}" cy="${cy}" r="4.5" fill="#10b981" stroke="#0b0f17" stroke-width="1.5" />
+        <text x="${cx}" y="${cy - 8}" fill="#f1f5f9" font-size="9" font-weight="bold" text-anchor="middle">${pt.weight}</text>
+        <text x="${cx}" y="${H - 4}" fill="#94a3b8" font-size="8" text-anchor="middle">${shortDate}</text>
+      `;
+    });
+
+    box.innerHTML = `
+      <svg viewBox="0 0 ${W} ${H}" style="width:100%; height:auto; display:block;">
+        <line x1="${padX}" y1="${targetY}" x2="${W - padX}" y2="${targetY}" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4,3" />
+        <text x="${W - padX}" y="${targetY - 4}" fill="#f59e0b" font-size="8" text-anchor="end">الهدف ${target}</text>
+        ${hist.length > 1 ? `<polyline fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="${pointsStr.trim()}" />` : ""}
+        ${dotsHtml}
+      </svg>
+    `;
+  }
+
+  // 7-Day Adherence Stats
+  function renderWeeklyStats() {
+    const box = document.getElementById("weeklyStatsBox");
+    if (!box) return;
+    let activeDays = 0, waterPctSum = 0, calDaysInTarget = 0, tasksPctSum = 0;
+
+    for (let i = 0; i < 7; i++) {
+      const dt = new Date();
+      dt.setDate(dt.getDate() - i);
+      const dStr = dt.toLocaleDateString("en-CA");
+      const raw = localStorage.getItem(STORAGE_PREFIX + dStr);
+      if (!raw) continue;
+      try {
+        const s = JSON.parse(raw);
+        const prog = PROGRAMS[s.dayMode] || PROGRAMS.gym;
+        const doneTasksCount = prog.tasks.filter(t => s.tasks && s.tasks[t.id]).length;
+        if (s.water > 0 || (s.meals && s.meals.length > 0) || doneTasksCount > 0) {
+          activeDays++;
+          waterPctSum += Math.min(100, (s.water / prog.waterGoal) * 100);
+          tasksPctSum += (doneTasksCount / prog.tasks.length) * 100;
+          const dayCal = (s.meals || []).reduce((a, b) => a + b.cal, 0);
+          if (dayCal > 0 && dayCal <= prog.calGoal + 100) calDaysInTarget++;
+        }
+      } catch (e) {}
+    }
+
+    const avgWater = activeDays ? Math.round(waterPctSum / activeDays) : 0;
+    const avgTasks = activeDays ? Math.round(tasksPctSum / activeDays) : 0;
+
+    box.innerHTML = `
+      <div class="macro-box">
+        <div class="macro-val" style="color:var(--blue);">${avgWater}%</div>
+        <div class="macro-lbl">متوسط شرب المي</div>
+      </div>
+      <div class="macro-box">
+        <div class="macro-val" style="color:var(--green);">${calDaysInTarget}/${activeDays || 1}</div>
+        <div class="macro-lbl">أيام ضمن السعرات</div>
+      </div>
+      <div class="macro-box">
+        <div class="macro-val" style="color:var(--amber);">${avgTasks}%</div>
+        <div class="macro-lbl">إنجاز الجدول</div>
+      </div>
+    `;
+  }
+
+  // Emergency Offset Calculator
   function calcOffset() {
     const nameInput = document.getElementById("extraNameInput");
     const calInput = document.getElementById("extraCalInput");
@@ -1744,6 +2340,7 @@
     saveState();
     renderMeals();
     renderOffsets();
+    renderWeeklyStats();
 
     nameInput.value = "";
     calInput.value = "";
@@ -1777,6 +2374,7 @@
     saveState();
     renderOffsets();
     renderMeals();
+    renderWeeklyStats();
   }
 
   function renderOffsets() {
@@ -1803,6 +2401,52 @@
     });
   }
 
+  // JSON Backup Export & Restore
+  function exportBackupJSON() {
+    const dump = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith("aburaslan_")) {
+        dump[k] = localStorage.getItem(k);
+      }
+    }
+    const blob = new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `aburaslan_health_backup_${currentTodayStr}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast("📥 تم تصدير النسخة الاحتياطية بنجاح");
+  }
+
+  function importBackupJSON(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      try {
+        const data = JSON.parse(evt.target.result);
+        let count = 0;
+        Object.keys(data).forEach(k => {
+          if (k.startsWith("aburaslan_")) {
+            localStorage.setItem(k, data[k]);
+            count++;
+          }
+        });
+        state = loadDayState(viewingDateStr);
+        renderAll(false);
+        showToast(`✅ تمت استعادة ${count} سجل بنجاح`);
+      } catch (err) {
+        showToast("⚠️ ملف النسخة الاحتياطية غير صالح");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  }
+
   function copyDailyReport() {
     const prog = getActiveProgram();
     const totalCal = state.meals.reduce((a, b) => a + b.cal, 0);
@@ -1818,10 +2462,10 @@
     const offsets = state.offsets || [];
     const offsetsTxt = offsets.map(o => `- ${o.name}: ${o.cal} سعرة (الساعة ${o.time})`).join("\n") || "- لا يوجد (التزام كامل)";
 
-    const report = `تقرير اليوم (${new Date().toLocaleDateString("ar-EG")}) — [${prog.label}]:
+    const report = `تقرير يوم (${viewingDateStr}) — [${prog.label}]:
 💧 الماء: ${state.water} / ${prog.waterGoal.toLocaleString("en-US")} مل
 🔥 السعرات: ${totalCal} / ${prog.calGoal.toLocaleString("en-US")} سعرة | البروتين: ${totalPro} / ${prog.proGoal} غ
-⚖️ الوزن: ${state.weight ? state.weight + " كغ" : "غير مسجّل"}
+⚖️ الوزن: ${state.weight ? state.weight + " كغ" : "غير مسجّل"} (الهدف: ${getTargetWeight()} كغ)
 🕌 الصلاة: الفروض (${fardDone}/5) | السنن الرواتب والوتر (${rawatibDone}/12)
 ✅ المهام المنجزة وأوقاتها:\n- ${doneTasks}
 🍽️ الوجبات والأوزان المحسوبة:\n${mealsTxt}
@@ -1841,9 +2485,12 @@
   }
 
   function resetToday() {
-    if (confirm("هل تريد تصفير عدّاد الماء والوجبات والصلوات لبدء يوم جديد؟")) {
-      localStorage.removeItem(todayKey);
-      location.reload();
+    if (confirm("هل تريد تصفير عدّاد الماء والوجبات والصلوات لهذا اليوم؟")) {
+      localStorage.removeItem(STORAGE_PREFIX + viewingDateStr);
+      state = loadDayState(viewingDateStr);
+      renderAll(false);
+      syncScheduleToCloud();
+      showToast("تم تصفير بيانات اليوم");
     }
   }
 
@@ -1852,6 +2499,10 @@
     document.querySelectorAll(".nav-btn").forEach(el => el.classList.remove("active"));
     document.getElementById("tab-" + tab).classList.add("active");
     btn.classList.add("active");
+    if (tab === "tools") {
+      renderWeight();
+      renderWeeklyStats();
+    }
   }
 
   function renderHeaderModes() {
@@ -1862,37 +2513,53 @@
     document.getElementById("activeTargetBadge").textContent = `${prog.waterGoal.toLocaleString("en-US")} مل`;
   }
 
-  function renderAll() {
+  function renderAll(shouldAutoScroll = false) {
+    renderDateHeader();
     renderHeaderModes();
     renderWater();
     renderTasks();
+    renderNextStationCard();
     renderMeals();
     renderPrayers();
     renderWeight();
+    renderWeeklyStats();
     renderOffsets();
     updateLockUI();
+
+    if (shouldAutoScroll && isViewingToday() && currentNextTaskId) {
+      setTimeout(() => {
+        const el = document.getElementById("task-row-" + currentNextTaskId);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 250);
+    }
   }
 
   // Init
-  const dateStr = new Date().toLocaleDateString("ar-EG", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
-  document.getElementById("dateDisplay").textContent = dateStr;
-
   document.body.addEventListener("pointerdown", unlockAudio, { once: true });
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
+      checkAutoDayRollover();
       updateLockUI();
+      renderNextStationCard();
       checkScheduledAlarms();
     }
   });
 
   updatePermBanner();
+  updateTelegramBadge();
   populateFoodSelect();
-  renderAll();
+  renderAll(true);
+  syncScheduleToCloud();
 
   setInterval(() => {
+    checkAutoDayRollover();
     updateLockUI();
     checkScheduledAlarms();
   }, 1000);
+
+  setInterval(() => {
+    renderNextStationCard();
+  }, 30000);
 </script>
 </body>
 </html>
