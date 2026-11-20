@@ -1727,21 +1727,30 @@ function checkAlarms() {
       .catch(() => showToast("⚠️ تعذّر الاتصال بتيليغرام"));
   }
 
-  function syncScheduleToCloud(manualNotify = false) {
+ function syncScheduleToCloud(manualNotify = false) {
     if (!isViewingToday()) return;
     const cfg = getTelegramConfig();
-    if (!cfg.botToken || !cfg.chatId || !cfg.webhookUrl) return;
+    if (!cfg.botToken || !cfg.chatId || !cfg.webhookUrl) {
+      if (manualNotify) showToast("⚠️ أدخل التوكن و Chat ID ورابط السكربت أولاً");
+      return;
+    }
+    if (!cfg.webhookUrl.includes("/exec")) {
+      if (manualNotify) showToast("⚠️ رابط السكربت يجب أن ينتهي بـ /exec");
+      return;
+    }
 
-    const pendingTasks = getActiveProgram().tasks
-      .filter(t => !state.tasks[t.id])
-      .map(t => {
-        const w = getTaskWater(t);
-        return {
-          id: t.id,
-          mins: getTaskMins(t.id),
-          text: `${t.text}${w > 0 ? ` (${w} مل مي)` : ""}`
-        };
-      });
+    const allTasks = getActiveProgram().tasks.map(t => {
+      const w = getTaskWater(t);
+      return {
+        id: t.id,
+        mins: getTaskMins(t.id),
+        text: `${t.text}${w > 0 ? ` (${w} مل مي)` : ""}`
+      };
+    });
+
+    const completedIds = getActiveProgram().tasks
+      .filter(t => !!state.tasks[t.id])
+      .map(t => t.id);
 
     fetch(cfg.webhookUrl, {
       method: "POST",
@@ -1751,11 +1760,14 @@ function checkAlarms() {
         date: currentTodayStr,
         botToken: cfg.botToken,
         chatId: cfg.chatId,
-        tasks: pendingTasks
+        tasks: allTasks,
+        completedIds: completedIds
       })
     }).then(() => {
-      if (manualNotify) showToast("✈️ تمت مزامنة جدول اليوم مع السحابة");
-    }).catch(() => {});
+      if (manualNotify) showToast(`✈️ تمت مزامنة ${allTasks.length} مهمة مع السحابة`);
+    }).catch(() => {
+      if (manualNotify) showToast("⚠️ فشل الاتصال بالسحابة — تحقق من الإنترنت والرابط");
+    });
   }
 
   // Audio & Repeating Alarm System
