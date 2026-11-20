@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0b0f17" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>برنامجي الصحي | 108.6 كغ</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2310b981'/%3E%3Ctext x='50' y='67' font-size='52' text-anchor='middle' fill='%230b0f17' font-family='sans-serif' font-weight='bold'%3E108%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2310b981'/%3E%3Ctext x='50' y='67' font-size='52' text-anchor='middle' fill='%230b0f17' font-family='sans-serif' font-weight='bold'%3E108%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #131b2b;
+      --card-2: #1a2438;
+      --border: #25324b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --green: #10b981;
+      --green-dim: rgba(16, 185, 129, 0.15);
+      --blue: #38bdf8;
+      --blue-dim: rgba(56, 189, 248, 0.15);
+      --red: #ef4444;
+      --red-dim: rgba(239, 68, 68, 0.15);
+      --amber: #f59e0b;
+      --amber-dim: rgba(245, 158, 11, 0.15);
+      --purple: #a78bfa;
+      --purple-dim: rgba(167, 139, 250, 0.15);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background: var(--bg); color: var(--text); padding-bottom: 88px; line-height: 1.5; }
+    .container { max-width: 520px; margin: 0 auto; padding: 12px; }
+
+    /* Permission Banner */
+    .perm-bar { background: var(--amber-dim); border: 1px solid rgba(245,158,11,0.4); color: var(--amber); padding: 9px 12px; border-radius: 12px; font-size: 12px; font-weight: 800; text-align: center; margin-bottom: 10px; cursor: pointer; }
+    .perm-bar.active { background: var(--green-dim); border-color: rgba(16,185,129,0.35); color: var(--green); }
+
+    /* Header & Mode Switcher */
+    .header { background: var(--card); padding: 12px 14px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 12px; }
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .header h1 { font-size: 17px; font-weight: 800; color: var(--text); }
+    .header .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .mode-pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #090d14; padding: 4px; border-radius: 11px; border: 1px solid var(--border); }
+    .mode-btn { background: none; border: none; color: var(--muted); padding: 7px 4px; border-radius: 8px; font-size: 11px; font-weight: 800; cursor: pointer; }
+    .mode-btn.active { background: var(--card-2); color: var(--green); border: 1px solid rgba(16,185,129,0.35); }
+
+    /* Cards */
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px; margin-bottom: 12px; }
+    .card-title { font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+
+    /* Progress Bars */
+    .progress-wrap { width: 100%; height: 10px; background: #090d14; border-radius: 999px; overflow: hidden; margin: 8px 0; border: 1px solid var(--border); }
+    .progress-fill { height: 100%; transition: width 0.3s ease; border-radius: 999px; }
+
+    /* Buttons */
+    .btn { border: none; border-radius: 11px; padding: 10px 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: transform 0.1s, opacity 0.2s; color: var(--text); background: var(--card-2); border: 1px solid var(--border); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 5px; }
+    .btn:active { transform: scale(0.96); }
+    .btn-blue { background: var(--blue-dim); color: var(--blue); border-color: rgba(56,189,248,0.35); }
+    .btn-green { background: var(--green); color: #062118; border: none; }
+    .btn-red { background: var(--red-dim); color: var(--red); border-color: rgba(239,68,68,0.35); }
+    .btn-amber { background: var(--amber-dim); color: var(--amber); border-color: rgba(245,158,11,0.35); }
+    .btn-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+    .btn-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+
+    /* Water Lock */
+    .lock-box { text-align: center; padding: 10px; border-radius: 12px; margin-bottom: 10px; }
+    .lock-open { background: var(--green-dim); border: 1px solid rgba(16,185,129,0.3); color: var(--green); }
+    .lock-closed { background: var(--red-dim); border: 1px solid rgba(239,68,68,0.4); color: var(--red); }
+    .timer-display { font-size: 30px; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: 1px; margin: 2px 0; }
+
+    /* Checklist */
+    .task-item { display: flex; align-items: flex-start; gap: 9px; padding: 10px; background: var(--card-2); border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--border); }
+    .task-item.meal-task { border-right: 3px solid var(--green); }
+    .task-item.prayer-task { border-right: 3px solid var(--purple); align-items: center; cursor: pointer; }
+    .task-item.done { opacity: 0.55; border-color: rgba(16,185,129,0.25); }
+    .task-item.done .task-text { text-decoration: line-through; }
+    .checkbox { width: 25px; height: 25px; border-radius: 7px; border: 2px solid var(--muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: bold; margin-top: 1px; cursor: pointer; }
+    .task-item.done .checkbox { background: var(--green); border-color: var(--green); color: #062118; }
+    .time-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+    .task-time { font-size: 11px; font-weight: 800; color: var(--blue); background: var(--blue-dim); padding: 3px 7px; border-radius: 6px; white-space: nowrap; cursor: pointer; border: 1px dashed rgba(56,189,248,0.45); }
+    .task-time.snoozed { color: var(--amber); background: var(--amber-dim); border-color: rgba(245,158,11,0.5); }
+    .sys-alarm-link { font-size: 10px; color: var(--muted); text-decoration: none; background: #090d14; padding: 2px 6px; border-radius: 5px; border: 1px solid var(--border); }
+    .task-body { flex: 1; }
+    .task-text { font-size: 13px; font-weight: 700; display: block; cursor: pointer; }
+    .task-sub { font-size: 11px; color: var(--muted); display: block; margin-top: 2px; }
+    .task-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; align-items: center; }
+    .pill-tag { font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 5px; }
+    .pill-lock { color: var(--red); background: var(--red-dim); }
+    .pill-cal { color: var(--green); background: var(--green-dim); }
+    .edit-meal-btn { font-size: 10px; font-weight: 800; color: var(--amber); background: var(--amber-dim); border: 1px solid rgba(245,158,11,0.35); padding: 2px 8px; border-radius: 6px; cursor: pointer; }
+
+    /* Inputs */
+    select, input { width: 100%; background: #090d14; border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 11px; font-size: 14px; outline: none; }
+    select:focus, input:focus { border-color: var(--green); }
+    .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 8px; margin-bottom: 8px; }
+
+    /* Category Switch */
+    .cat-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: #090d14; padding: 4px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border); }
+    .cat-btn { background: none; border: none; color: var(--muted); padding: 8px; border-radius: 9px; font-size: 12px; font-weight: 800; cursor: pointer; }
+    .cat-btn.active { background: var(--card-2); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+
+    /* Macros Summary */
+    .macro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+    .macro-box { background: var(--card-2); padding: 10px 6px; border-radius: 12px; border: 1px solid var(--border); }
+    .macro-val { font-size: 18px; font-weight: 900; }
+    .macro-lbl { font-size: 11px; color: var(--muted); }
+
+    /* Meal Log */
+    .meal-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 10px; background: var(--card-2); border-radius: 10px; margin-bottom: 6px; font-size: 13px; }
+    .del-btn { background: none; border: none; color: var(--red); font-size: 18px; font-weight: bold; cursor: pointer; padding: 0 6px; }
+
+    /* Bottom Nav */
+    .nav { position: fixed; bottom: 0; left: 0; right: 0; background: #0f1623; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 4px 12px; z-index: 50; }
+    .nav-btn { background: none; border: none; color: var(--muted); font-size: 11px; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; flex: 1; }
+    .nav-btn.active { color: var(--green); }
+    .nav-icon { font-size: 18px; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .preview-pill { font-size: 12px; color: var(--green); background: var(--green-dim); padding: 6px 10px; border-radius: 8px; margin-bottom: 8px; text-align: center; font-weight: 700; }
+    .toast { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); background: var(--green); color: #062118; padding: 9px 18px; border-radius: 999px; font-weight: 800; font-size: 13px; z-index: 250; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.5); white-space: nowrap; }
+
+    /* Modals */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(5, 8, 15, 0.9); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 200; overflow-y: auto; }
+    .modal-card { background: var(--card); border: 2px solid var(--amber); border-radius: 20px; padding: 18px; width: 100%; max-width: 430px; text-align: center; box-shadow: 0 12px 40px rgba(0,0,0,0.75); }
+    .modal-card.pulse { animation: pulseBorder 1.5s infinite; }
+    @keyframes pulseBorder { 0%, 100% { border-color: var(--amber); } 50% { border-color: var(--green); } }
+    .modal-icon { font-size: 40px; margin-bottom: 6px; }
+    .modal-title { font-size: 17px; font-weight: 900; margin-bottom: 6px; color: var(--text); }
+    .modal-desc { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+    .ing-row { display: grid; grid-template-columns: 2fr 80px 30px; gap: 6px; align-items: center; background: var(--card-2); padding: 7px 9px; border-radius: 10px; margin-bottom: 6px; text-align: right; font-size: 12px; }
+    .ing-row input { padding: 6px 8px; font-size: 13px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<div id="toast" class="toast">تم الحفظ</div>
+
+<!-- 1. Repeating Alarm Modal -->
+<div id="alarmModal" class="modal-overlay">
+  <div class="modal-card pulse">
+    <div class="modal-icon" id="alarmIcon">⏰</div>
+    <div class="modal-title" id="alarmTitle">موعد المهمة</div>
+    <div class="modal-desc" id="alarmDesc">تفاصيل المهمة</div>
+    <div id="alarmTaskActions" class="btn-grid-2">
+      <button class="btn btn-green" style="padding:13px; font-size:15px;" onclick="confirmAlarmDone()">✅ تم الآن</button>
+      <button class="btn btn-amber" style="padding:13px; font-size:15px;" onclick="snoozeAlarm5()">💤 غفوة 5 د</button>
+    </div>
+    <div id="alarmLockActions" style="display:none;">
+      <button class="btn btn-green" style="width:100%; padding:13px; font-size:15px;" onclick="dismissLockAlarm()">✅ فهمت (إيقاف الصوت)</button>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Manual Time Edit Modal -->
+<div id="timeEditModal" class="modal-overlay">
+  <div class="modal-card" style="border-color: var(--blue);">
+    <div class="modal-title" id="editTaskTitle">تعديل وقت المهمة</div>
+    <div class="modal-desc">اختر الساعة الفعلية (إذا أكلت بوقتك ونسيت تضغط، اتركها كما هي واضغط حفظ حتى يحسب باقي قفل المي بدون تزحيف):</div>
+    <input type="time" id="editTimeInput" style="font-size:20px; font-weight:800; text-align:center; margin-bottom:14px;" />
+    <div class="btn-grid-2">
+      <button class="btn btn-green" onclick="saveEditedTime()">حفظ الوقت</button>
+      <button class="btn" onclick="closeTimeEdit()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Meal Customizer Modal -->
+<div id="mealEditModal" class="modal-overlay">
+  <div class="modal-card" style="border-color: var(--green); text-align: right;">
+    <div class="modal-title" style="text-align:center;" id="mealEditTitle">تخصيص أصناف وأوزان الوجبة</div>
+    <div id="mealIngredientsList" style="max-height: 230px; overflow-y: auto; margin-bottom: 10px;"></div>
+
+    <div style="border-top: 1px solid var(--border); padding-top: 10px; margin-bottom: 10px;">
+      <div style="font-size: 11px; color: var(--muted); margin-bottom: 5px;">➕ إضافة أو تبديل صنف في هذه الوجبة:</div>
+      <div class="form-row">
+        <select id="mealAddSelect"></select>
+        <input type="number" id="mealAddGrams" value="100" placeholder="غرام" />
+      </div>
+      <button class="btn btn-blue" style="width:100%; padding:8px; font-size:12px;" onclick="addIngredientToMeal()">+ إضافة الصنف للوجبة</button>
+    </div>
+
+    <div id="mealEditSummary" class="preview-pill">الإجمالي: 0 سعرة | 0 غ بروتين</div>
+    <div class="btn-grid-2">
+      <button class="btn btn-green" onclick="saveMealCustomization()">حفظ التعديل</button>
+      <button class="btn" onclick="closeMealEdit()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Audio & Notification Activation Bar -->
+  <div id="permBanner" class="perm-bar" onclick="enableAlertsAndAudio()">
+    🔔 اضغط لتفعيل التنبيهات (ولضمان الوصول بالخلفية: اجعل بطارية التطبيق "غير مقيد" في إعدادات S25 Ultra)
+  </div>
+
+  <!-- Header & Program Mode Switcher -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <h1>متابع البرنامج الصحي</h1>
+        <div class="sub" id="dateDisplay">جاري التحميل...</div>
+      </div>
+      <span id="activeTargetBadge" style="font-size:11px; font-weight:800; color:var(--green); background:var(--green-dim); padding:4px 9px; border-radius:999px;">3,250 مل</span>
+    </div>
+    <div class="mode-pills">
+      <button id="mode-gym" class="mode-btn" onclick="switchDayMode('gym')">💪 أيام النادي</button>
+      <button id="mode-sat" class="mode-btn" onclick="switchDayMode('sat')">🏋️ السبت (2 ظ)</button>
+      <button id="mode-rest" class="mode-btn" onclick="switchDayMode('rest')">🛌 راحة (خميس/أحد)</button>
+    </div>
+  </div>
+
+  <!-- TAB 1: TODAY (WATER + LOCK + FULL SCHEDULE) -->
+  <div id="tab-today" class="tab-content active">
+
+    <!-- Water Lock Timer -->
+    <div class="card">
+      <div class="card-title">
+        <span>⏱️ مؤقت قفل الماء (الهضم)</span>
+        <div style="display:flex; gap:5px;">
+          <a id="lockSysAlarmBtn" href="#" class="btn btn-amber" style="padding:4px 8px; font-size:11px; display:none;">⏰ منبّه جوال</a>
+          <button class="btn" style="padding:4px 8px; font-size:11px;" onclick="playSingleChime()">🔔 تجربة</button>
+        </div>
+      </div>
+      <div id="lockStatusBox" class="lock-box lock-open">
+        <div id="lockStatusText" style="font-size:13px; font-weight:800;">✅ باب الماء مفتوح — اشرب رشفات هادية</div>
+        <div id="lockTimerText" class="timer-display" style="display:none;">45:00</div>
+      </div>
+      <div class="btn-grid-2">
+        <button class="btn btn-red" onclick="startWaterLock(45)">🔒 قفل 45 د</button>
+        <button class="btn btn-amber" onclick="startWaterLock(30)">🔒 قفل 30 د</button>
+      </div>
+      <button id="cancelLockBtn" class="btn" style="width:100%; margin-top:7px; display:none; font-size:12px;" onclick="cancelWaterLock()">إلغاء القفل يدوياً</button>
+    </div>
+
+    <!-- Hydration Counter -->
+    <div class="card">
+      <div class="card-title">
+        <span>💧 عدّاد الماء اليومي</span>
+        <span style="color:var(--blue); font-weight:900;"><span id="waterVal">0</span> / <span id="waterGoalLabel">3,250</span> مل</span>
+      </div>
+      <div class="progress-wrap">
+        <div id="waterBar" class="progress-fill" style="width:0%; background:var(--blue);"></div>
+      </div>
+      <div class="btn-grid-4" style="margin-top:10px;">
+        <button class="btn btn-blue" onclick="addWater(100)">+100 مل</button>
+        <button class="btn btn-blue" onclick="addWater(150)">+150 مل</button>
+        <button class="btn btn-blue" onclick="addWater(200)">+200 مل</button>
+        <button class="btn btn-blue" onclick="addWater(250)">+250 مل</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+        <span style="font-size:11px; color:var(--muted);">المتبقي للهدف: <strong id="waterRem">3,250</strong> مل</span>
+        <button class="btn" style="padding:4px 10px; font-size:11px;" onclick="addWater(-50)">تراجع -50 مل</button>
+      </div>
+    </div>
+
+    <!-- Full Daily Checklist -->
+    <div class="card">
+      <div class="card-title">
+        <span>📋 جدول اليوم (اضغط عالوقت لتعديله)</span>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <button class="btn" style="padding:3px 7px; font-size:10px;" onclick="resetScheduleTimes()">إعادة الساعات</button>
+          <span id="tasksProgress" style="font-size:12px; color:var(--green);">0/0</span>
+        </div>
+      </div>
+      <div id="tasksList"></div>
+    </div>
+
+  </div>
+
+  <!-- TAB 2: CALORIES & MEALS -->
+  <div id="tab-food" class="tab-content">
+    <div class="card">
+      <div class="card-title">
+        <span>🔥 ميزانية السعرات والبروتين</span>
+        <span style="font-size:12px; color:var(--muted);">السقف: <span id="calGoalLabel">1,850</span> سعرة</span>
+      </div>
+      <div class="macro-grid">
+        <div class="macro-box">
+          <div class="macro-val" style="color:var(--green);" id="calVal">0</div>
+          <div class="macro-lbl">سعرة مستهلكة</div>
+        </div>
+        <div class="macro-box">
+          <div class="macro-val" style="color:var(--amber);" id="calRem">1,850</div>
+          <div class="macro-lbl">سعرة متبقية</div>
+        </div>
+        <div class="macro-box">
+          <div class="macro-val" style="color:var(--blue);" id="proVal">0 غ</div>
+          <div class="macro-lbl">بروتين (الهدف <span id="proGoalLabel">140</span>غ)</div>
+        </div>
+      </div>
+      <div class="progress-wrap" style="margin-top:10px;">
+        <div id="calBar" class="progress-fill" style="width:0%; background:var(--green);"></div>
+      </div>
+    </div>
+
+    <!-- Categorized Gram Calculator -->
+    <div class="card">
+      <div class="card-title"><span>⚖️ حاسبة الأكل الإضافي بالغرام (مرتبة أبجدياً)</span></div>
+
+      <div class="cat-switch">
+        <button id="catFoodBtn" class="cat-btn active" onclick="setFoodCategory('food')">🍗 قائمة الأطعمة</button>
+        <button id="catFruitBtn" class="cat-btn" onclick="setFoodCategory('fruit')">🍎 الفواكه والقشطة والعسل</button>
+      </div>
+
+      <div class="form-row">
+        <select id="foodSelect" onchange="updateFoodPreview()"></select>
+        <input type="number" id="foodGrams" placeholder="الوزن (غ)" value="100" oninput="updateFoodPreview()" />
+      </div>
+      <div id="customMacroInputs" class="form-row" style="display:none;">
+        <input type="number" id="customCal100" placeholder="سعرات كل 100غ" oninput="updateFoodPreview()" />
+        <input type="number" id="customPro100" placeholder="بروتين كل 100غ" oninput="updateFoodPreview()" />
+      </div>
+      <div id="foodPreview" class="preview-pill">النتيجة: 0 سعرة | 0 غ بروتين</div>
+      <button class="btn btn-green" style="width:100%;" onclick="addFoodItem()">+ إضافة إلى وجبات اليوم</button>
+    </div>
+
+    <!-- Logged Meals -->
+    <div class="card">
+      <div class="card-title"><span>🍽️ سجل الوجبات المحسوبة اليوم</span></div>
+      <div id="mealsList"><div style="font-size:12px; color:var(--muted); text-align:center;">ضع علامة ✓ على أي وجبة بالرئيسية أو أضفها هنا</div></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: PRAYERS & SHAFI'I RAWATIB -->
+  <div id="tab-prayer" class="tab-content">
+    <div class="card">
+      <div class="card-title">
+        <span>🕌 الصلوات الخمس المفروضة</span>
+        <span id="fardProgress" style="font-size:12px; color:var(--purple); font-weight:800;">0/5</span>
+      </div>
+      <div id="fardList"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>📿 السنن الرواتب المؤكدة (المذهب الشافعي — 10 ركعات)</span>
+        <span id="sunnahConfirmedProgress" style="font-size:12px; color:var(--green); font-weight:800;">0/5</span>
+      </div>
+      <div id="sunnahConfirmedList"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>🌙 السنن الرواتب غير المؤكدة والوتر (المذهب الشافعي)</span>
+        <span id="sunnahExtraProgress" style="font-size:12px; color:var(--amber); font-weight:800;">0/7</span>
+      </div>
+      <div id="sunnahExtraList"></div>
+    </div>
+  </div>
+
+  <!-- TAB 4: WEIGHT, OFFSET & REPORT -->
+  <div id="tab-tools" class="tab-content">
+    <!-- Weight Tracker -->
+    <div class="card">
+      <div class="card-title">
+        <span>⚖️ متابعة الوزن (هدف السبت: 108.6 كغ)</span>
+      </div>
+      <div class="form-row">
+        <input type="number" step="0.1" id="weightInput" placeholder="وزنك الصباحي (مثلاً 109.2)" />
+        <button class="btn btn-green" onclick="saveWeight()">حفظ</button>
+      </div>
+      <div id="weightDiffText" style="font-size:13px; color:var(--muted); margin-top:4px;">أدخل وزنك الصباحي بعد دخول الحمام وقبل الشرب.</div>
+    </div>
+
+    <!-- Emergency Offset Calculator -->
+    <div class="card">
+      <div class="card-title"><span>🧮 مُعدّل الطوارئ (تصحيح أي أكلة إضافية)</span></div>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">أكلت قطعة حلو أو لقمة خارج البرنامج؟ اكتب اسمها وسعراتها حتى نحسبلك التعديل ونسجّلها بالتقرير:</p>
+      <div class="form-row">
+        <input type="text" id="extraNameInput" placeholder="اسم الأكلة (مثلاً: تريليتشا 77غ)" />
+        <input type="number" id="extraCalInput" placeholder="السعرات (210)" />
+      </div>
+      <button class="btn btn-amber" style="width:100%;" onclick="calcOffset()">احسب التعديل وسجّلها</button>
+      <div id="offsetResult" style="font-size:13px; background:var(--card-2); padding:10px; border-radius:10px; display:none; margin-top:8px; border:1px solid var(--border);"></div>
+      <div id="offsetLogList" style="margin-top:8px;"></div>
+    </div>
+
+    <!-- Export & Reset -->
+    <div class="card">
+      <div class="card-title"><span>📤 مشاركة التقرير وإدارة اليوم</span></div>
+      <button class="btn btn-blue" style="width:100%; margin-bottom:8px;" onclick="copyDailyReport()">📋 نسخ تقرير اليوم (للصقه في المحادثة)</button>
+      <button class="btn btn-red" style="width:100%;" onclick="resetToday()">🔄 تصفير بيانات اليوم وبدء يوم جديد</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="nav">
+  <button class="nav-btn active" onclick="switchTab('today', this)"><span class="nav-icon">💧</span>اليوم والوجبات</button>
+  <button class="nav-btn" onclick="switchTab('food', this)"><span class="nav-icon">🍗</span>السعرات</button>
+  <button class="nav-btn" onclick="switchTab('prayer', this)"><span class="nav-icon">🕌</span>الصلاة</button>
+  <button class="nav-btn" onclick="switchTab('tools', this)"><span class="nav-icon">📊</span>الوزن والتقرير</button>
+</div>
+
+<script>
+  // 1. قائمة الأطعمة مرتبة أبجدياً (لكل 100غ)
+  const SAVORY_FOODS = [
+    { name: "أفوكادو", cal: 160, pro: 2 },
+    { name: "أمريكانو سادة", cal: 2, pro: 0 },
+    { name: "برغل ببندورة التركي", cal: 115, pro: 3.2 },
+    { name: "برغل مطبوخ سادة", cal: 86, pro: 3 },
+    { name: "بطاطا مسلوقة سادة", cal: 87, pro: 2 },
+    { name: "بياض بيض مسلوق", cal: 52, pro: 11 },
+    { name: "بيض كامل مسلوق", cal: 143, pro: 12.6 },
+    { name: "تونة مصفاية", cal: 115, pro: 25 },
+    { name: "جوز نيء", cal: 654, pro: 15 },
+    { name: "حمص مطبوخ التركي", cal: 165, pro: 8.9 },
+    { name: "زيت زيتون", cal: 884, pro: 0 },
+    { name: "زيتون أسود/أخضر", cal: 145, pro: 1 },
+    { name: "سلطة خضراء مشكلة", cal: 20, pro: 1 },
+    { name: "صدر مطبوخ مع الكبسة", cal: 195, pro: 29 },
+    { name: "صدر مطبوخ مع المندي", cal: 185, pro: 30 },
+    { name: "صدور دجاج مسلوقة/مشوية", cal: 165, pro: 31 },
+    { name: "فخاد مطبوخة مع المندي أو الكبسة", cal: 235, pro: 24 },
+    { name: "كاجو نيء", cal: 553, pro: 18 },
+    { name: "كبسة سورية - أرز", cal: 155, pro: 3 },
+    { name: "لبن رايب", cal: 60, pro: 3.5 },
+    { name: "لحم مشوي أو مسلوق هبر", cal: 210, pro: 27 },
+    { name: "لوز نيء", cal: 579, pro: 21 },
+    { name: "مندي سوري - أرز", cal: 150, pro: 2.8 },
+    { name: "➕ إدخال يدوي لأكلة مخصصة", cal: 0, pro: 0, custom: true }
+  ];
+
+  // 2. قائمة الفواكه والحليب والقشطة والعسل مرتبة أبجدياً (لكل 100غ)
+  const SWEET_DAIRY_FOODS = [
+    { name: "إجاص", cal: 57, pro: 0.4 },
+    { name: "برتقال", cal: 47, pro: 0.9 },
+    { name: "تفاح", cal: 52, pro: 0.3 },
+    { name: "تمر", cal: 280, pro: 2.5 },
+    { name: "تين مجفف", cal: 249, pro: 3.3 },
+    { name: "حليب كامل الدسم", cal: 61, pro: 3.2 },
+    { name: "خوخ أسود", cal: 46, pro: 0.7 },
+    { name: "عسل نحل", cal: 304, pro: 0.3 },
+    { name: "عنب أحمر", cal: 69, pro: 0.7 },
+    { name: "عنب أخضر", cal: 69, pro: 0.7 },
+    { name: "قشطة البيم الجاهزة - كايماك", cal: 580, pro: 2.5 },
+    { name: "قشطة الحليب المغلي على الوجه", cal: 340, pro: 2.5 },
+    { name: "كيوي", cal: 61, pro: 1.1 },
+    { name: "موز", cal: 89, pro: 1.1 },
+    { name: "يوسفي", cal: 53, pro: 0.8 }
+  ];
+
+  const ALL_FOOD_ITEMS = [...SAVORY_FOODS.filter(x => !x.custom), ...SWEET_DAIRY_FOODS].sort((a, b) => a.name.localeCompare(b.name, "ar"));
+
+  // 3. تعريف البرامج التلاتة (أيام النادي، السبت 2 ظ، أيام الراحة الخميس والأحد)
+  const PROGRAMS = {
+    gym: {
+      label: "أيام النادي (تمرين 7:05 م)",
+      waterGoal: 3250,
+      calGoal: 1850,
+      proGoal: 140,
+      tasks: [
+        { id: "p1", baseMins: 8 * 60 + 0, text: "💊 الدواء الصباحي: بينتاسا + 250 مل مي صافية", water: 250 },
+        { id: "m1", baseMins: 8 * 60 + 30, text: "🍵 المشروب الصباحي الدافئ (200 مل)", sub: "ماء دافئ + نصف ليمونة + نصف م.ص زنجبيل + قرفة + كركم", water: 200, lock: 30 },
+        {
+          id: "bf", baseMins: 9 * 60 + 0, text: "🍽️ وجبة الفطور", lock: 45,
+          defaultItems: [
+            { name: "بيض كامل مسلوق", grams: 110, cal100: 143, pro100: 12.6 },
+            { name: "بياض بيض مسلوق", grams: 66, cal100: 52, pro100: 11 },
+            { name: "بطاطا مسلوقة سادة", grams: 150, cal100: 87, pro100: 2 },
+            { name: "لبن رايب", grams: 150, cal100: 60, pro100: 3.5 },
+            { name: "زيت زيتون", grams: 5, cal100: 884, pro100: 0 },
+            { name: "يوسفي", grams: 125, cal100: 53, pro100: 0.8 }
+          ]
+        },
+        { id: "w_10", baseMins: 10 * 60 + 0, text: "💧 فتح باب المي: 250 مل مي صافية رشفات هادية", water: 250 },
+        { id: "c1", baseMins: 11 * 60 + 0, text: "☕ كافيين (1): أمريكانو 100 مل + 150 مل مي فوراً", water: 150 },
+        { id: "w_12", baseMins: 12 * 60 + 15, text: "💧 ترطيب الظهر: 200 مل مي صافية", water: 200 },
+        { id: "w_13", baseMins: 13 * 60 + 25, text: "💧 ترطيب ما قبل الغداء: 200 مل مي (بدون دواء)", water: 200, lock: 35 },
+        {
+          id: "ln", baseMins: 14 * 60 + 0, text: "🍽️ وجبة الغداء (الحصة الكاملة)", lock: 45,
+          defaultItems: [
+            { name: "برغل مطبوخ سادة", grams: 200, cal100: 86, pro100: 3 },
+            { name: "صدور دجاج مسلوقة/مشوية", grams: 200, cal100: 165, pro100: 31 },
+            { name: "سلطة خضراء مشكلة", grams: 200, cal100: 20, pro100: 1 },
+            { name: "زيت زيتون", grams: 5, cal100: 884, pro100: 0 },
+            { name: "تفاح", grams: 125, cal100: 52, pro100: 0.3 }
+          ]
+        },
+        { id: "w_15", baseMins: 15 * 60 + 5, text: "💧 فتح باب المي: 250 مل مي صافية رشفات هادية", water: 250 },
+        { id: "c2", baseMins: 16 * 60 + 0, text: "☕ كافيين (2): أمريكانو 100 مل + 150 مل مي (آخر كافيين)", water: 150 },
+        { id: "w_17", baseMins: 17 * 60 + 0, text: "💧 ترطيب العصر: 200 مل مي صافية", water: 200 },
+        { id: "w_work", baseMins: 17 * 60 + 50, text: "💧 تقفيلة مي الشغل: 150 مل مي صافية", water: 150, lock: 30 },
+        {
+          id: "gym_snack", baseMins: 18 * 60 + 20, text: "🥔 وجبة قبل التمرين", lock: 45,
+          defaultItems: [
+            { name: "بطاطا مسلوقة سادة", grams: 110, cal100: 87, pro100: 2 },
+            { name: "تمر", grams: 24, cal100: 280, pro100: 2.5 },
+            { name: "جوز نيء", grams: 15, cal100: 654, pro100: 15 }
+          ]
+        },
+        { id: "gym", baseMins: 19 * 60 + 5, text: "💪 تمرين النادي + 850 مل مي رشفات (بعد 10 د إحماء)", water: 850 },
+        { id: "p2", baseMins: 20 * 60 + 50, text: "💊 الدواء المسائي: بينتاسا + 200 مل مي صافية", water: 200 },
+        {
+          id: "dn", baseMins: 21 * 60 + 10, text: "🍽️ العشاء / بعد التمرين", lock: 45,
+          defaultItems: [
+            { name: "تونة مصفاية", grams: 104, cal100: 115, pro100: 25 },
+            { name: "سلطة خضراء مشكلة", grams: 250, cal100: 20, pro100: 1 },
+            { name: "زيت زيتون", grams: 5, cal100: 884, pro100: 0 },
+            { name: "كيوي", grams: 100, cal100: 61, pro100: 1.1 }
+          ]
+        },
+        {
+          id: "night_snack", baseMins: 22 * 60 + 5, text: "🥜 تقفيلة المي (250 مل) والمكسرات التكميلية", water: 250,
+          defaultItems: [
+            { name: "لوز نيء", grams: 12, cal100: 579, pro100: 21 }
+          ]
+        },
+        { id: "mes", baseMins: 22 * 60 + 50, text: "🛌 تفريغ الأمعاء والمثانة + حقنة الميسوسيل والنوم" }
+      ]
+    },
+
+    sat: {
+      label: "برنامج السبت (تمرين 2:00 ظ)",
+      waterGoal: 3250,
+      calGoal: 1850,
+      proGoal: 140,
+      tasks: [
+        { id: "p1", baseMins: 8 * 60 + 0, text: "💊 الدواء الصباحي: بينتاسا + 250 مل مي صافية", water: 250 },
+        { id: "m1", baseMins: 8 * 60 + 30, text: "🍵 المشروب الصباحي الدافئ (200 مل)", sub: "ماء دافئ + نصف ليمونة + زنجبيل + قرفة + كركم", water: 200, lock: 30 },
+        {
+          id: "bf", baseMins: 9 * 60 + 0, text: "🍽️ وجبة الفطور", lock: 45,
+          defaultItems: [
+            { name: "بيض كامل مسلوق", grams: 110, cal100: 143, pro100: 12.6 },
+            { name: "بياض بيض مسلوق", grams: 66, cal100: 52, pro100: 11 },
+            { name: "بطاطا مسلوقة سادة", grams: 150, cal100: 87, pro100: 2 },
+            { name: "لبن رايب", grams: 150, cal100: 60, pro100: 3.5 },
+            { name: "زيت زيتون", grams: 5, cal100: 884, pro100: 0 },
+            { name: "يوسفي", grams: 125, cal100: 53, pro100: 0.8 }
+          ]
+        },
+        { id: "w_10", baseMins: 10 * 60 + 0, text: "💧 فتح باب المي: 250 مل مي صافية رشفات هادية", water: 250 },
+        { id: "c1", baseMins: 11 * 60 + 0, text: "☕ كافيين (1): أمريكانو 100 مل + 150 مل مي صافية", water: 150 },
+        { id: "w_12", baseMins: 12 * 60 + 0, text: "💧 ترطيب ما قبل الوجبة: 200 مل مي صافية", water: 200, lock: 30 },
+        {
+          id: "gym_snack", baseMins: 12 * 60 + 30, text: "🥔 وجبة قبل التمرين (قبل النادي بـ 90 د)", lock: 45,
+          defaultItems: [
+            { name: "بطاطا مسلوقة سادة", grams: 110, cal100: 87, pro100: 2 },
+            { name: "تمر", grams: 24, cal100: 280, pro100: 2.5 },
+            { name: "جوز نيء", grams: 15, cal100: 654, pro100: 15 }
+          ]
+        },
+        { id: "w_pre_gym", baseMins: 13 * 60 + 15, text: "💧 تجهيز التمرين: 150 مل مي قبل النزول عالنادي", water: 150 },
+        { id: "gym", baseMins: 14 * 60 + 0, text: "💪 تمرين النادي + 850 مل مي رشفات (بعد 10 د إحماء)", water: 850 },
+        {
+          id: "ln", baseMins: 15 * 60 + 45, text: "🍽️ الوجبة الرئيسية (بعد التمرين)", lock: 45,
+          defaultItems: [
+            { name: "برغل مطبوخ سادة", grams: 200, cal100: 86, pro100: 3 },
+            { name: "صدور دجاج مسلوقة/مشوية", grams: 200, cal100: 165, pro100: 31 },
+            { name: "سلطة خضراء مشكلة", grams: 200, cal100: 20, pro100: 1 },
+            { name: "زيت زيتون", grams: 5, cal100: 884, pro100: 0 },
+            { name: "تفاح", grams: 125, cal100: 52, pro100: 0.3 }
+          ]
+        },
+        { id: "c2", baseMins: 16 * 60 + 50, text: "💧 فتح المي (250 مل) + كافيين (2) أمريكانو 100 مل", water: 250 },
+        { id: "w_18", baseMins: 18 * 60 + 15, text: "💧 ترطيب المسا (1): 250 مل مي صافية", water: 250 },
+        { id: "w_19", baseMins: 19 * 60 + 30, text: "💧 ترطيب المسا (2): 250 مل مي صافية", water: 250 },
+        { id: "p2", baseMins: 20 * 60 + 50, text: "💊 الدواء المسائي: بينتاسا + 200 مل مي صافية", water: 200 },
+        {
+          id: "dn", baseMins: 21 * 60 + 10, text: "🍽️ وجبة العشاء", lock: 45,
+          defaultItems: [
+            { name: "تونة مصفاية", grams: 104, cal100: 115, pro100: 25 },
+            { name: "سلطة خضراء مشكلة", grams: 250, cal100: 20, pro100: 1 },
+            { name: "زيت زيتون", grams: 5, cal100: 884, pro100: 0 },
+            { name: "كيوي", grams: 100, cal100: 61, pro100: 1.1 }
+          ]
+        },
+        {
+          id: "night_snack", baseMins: 22 * 60 + 5, text: "🥜 تقفيلة المي (250 مل) والمكسرات التكميلية", water: 250,
+          defaultItems: [
+            { name: "لوز نيء", grams: 12, cal100: 579, pro100: 21 }
+          ]
+        },
+        { id: "mes", baseMins: 22 * 60 + 50, text: "🛌 تفريغ الأمعاء والمثانة + حقنة الميسوسيل والنوم" }
+      ]
+    },
+
+    rest: {
+      label: "يوم راحة (الخميس والأحد)",
+      waterGoal: 3000,
+      calGoal: 1650,
+      proGoal: 135,
+      tasks: [
+        { id: "p1", baseMins: 8 * 60 + 0, text: "💊 الدواء الصباحي: بينتاسا + 250 مل مي صافية", water: 250 },
+        { id: "m1", baseMins: 8 * 60 + 30, text: "🍵 المشروب الصباحي الدافئ (200 مل)", sub: "ماء دافئ + نصف ليمونة + زنجبيل + قرفة + كركم", water: 200, lock: 30 },
+        {
+          id: "bf", baseMins: 9 * 60 + 0, text: "🍽️ الفطور المعتاد", lock: 45,
+          defaultItems: [
+            { name: "بيض كامل مسلوق", grams: 110, cal100: 143, pro100: 12.6 },
+            { name: "بياض بيض مسلوق", grams: 66, cal100: 52, pro100: 11 },
+            { name: "بطاطا مسلوقة سادة", grams: 150, cal100: 87, pro100: 2 },
+            { name: "لبن رايب", grams: 150, cal100: 60, pro100: 3.5 },
+            { name: "زيت زيتون", grams: 5, cal100: 884, pro100: 0 }
+          ]
+        },
+        {
+          id: "fr1", baseMins: 9 * 60 + 45, text: "🍊 فتح باب المي (250 مل) + فاكهة (1)", water: 250,
+          defaultItems: [
+            { name: "يوسفي", grams: 125, cal100: 53, pro100: 0.8 }
+          ]
+        },
+        { id: "c1", baseMins: 11 * 60 + 0, text: "☕ كافيين (1): أمريكانو 100 مل + 150 مل مي فوراً", water: 150 },
+        { id: "w_12", baseMins: 12 * 60 + 15, text: "💧 ترطيب الظهر: 250 مل مي صافية", water: 250 },
+        { id: "w_13", baseMins: 13 * 60 + 25, text: "💧 ترطيب ما قبل الغداء: 200 مل مي (بدون دواء)", water: 200, lock: 35 },
+        {
+          id: "ln", baseMins: 14 * 60 + 0, text: "🍽️ الغداء (معدّل ليوم الراحة: 150غ برغل)", lock: 45,
+          defaultItems: [
+            { name: "برغل مطبوخ سادة", grams: 150, cal100: 86, pro100: 3 },
+            { name: "صدور دجاج مسلوقة/مشوية", grams: 200, cal100: 165, pro100: 31 },
+            { name: "سلطة خضراء مشكلة", grams: 200, cal100: 20, pro100: 1 },
+            { name: "زيت زيتون", grams: 5, cal100: 884, pro100: 0 }
+          ]
+        },
+        {
+          id: "fr2", baseMins: 14 * 60 + 45, text: "🍏 فتح باب المي (250 مل) + فاكهة (2)", water: 250,
+          defaultItems: [
+            { name: "تفاح", grams: 125, cal100: 52, pro100: 0.3 }
+          ]
+        },
+        { id: "c2", baseMins: 16 * 60 + 0, text: "☕ كافيين (2): أمريكانو 100 مل + 150 مل مي (آخر كافيين)", water: 150 },
+        { id: "w_17", baseMins: 17 * 60 + 0, text: "💧 ترطيب العصر: 250 مل مي صافية", water: 250, lock: 30 },
+        {
+          id: "rest_snack", baseMins: 17 * 60 + 30, text: "🍌 سناك العصر (يوم الراحة — بدون بطاطا)", lock: 45,
+          defaultItems: [
+            { name: "تمر", grams: 24, cal100: 280, pro100: 2.5 },
+            { name: "جوز نيء", grams: 15, cal100: 654, pro100: 15 },
+            { name: "موز", grams: 80, cal100: 89, pro100: 1.1 }
+          ]
+        },
+        { id: "w_18", baseMins: 18 * 60 + 45, text: "💧 ترطيب المسا (1): 300 مل مي رشفات هادية", water: 300 },
+        { id: "w_19", baseMins: 19 * 60 + 50, text: "💧 ترطيب المسا (2): 250 مل مي صافية", water: 250 },
+        { id: "p2", baseMins: 20 * 60 + 50, text: "💊 الدواء المسائي: بينتاسا + 250 مل مي صافية", water: 250 },
+        {
+          id: "dn", baseMins: 21 * 60 + 10, text: "🍽️ العشاء + فاكهة (3)", lock: 45,
+          defaultItems: [
+            { name: "تونة مصفاية", grams: 104, cal100: 115, pro100: 25 },
+            { name: "سلطة خضراء مشكلة", grams: 250, cal100: 20, pro100: 1 },
+            { name: "زيت زيتون", grams: 5, cal100: 884, pro100: 0 },
+            { name: "كيوي", grams: 100, cal100: 61, pro100: 1.1 }
+          ]
+        },
+        {
+          id: "night_snack", baseMins: 22 * 60 + 5, text: "🥜 تقفيلة المي (250 مل) والمكسرات (10–15غ)", water: 250,
+          defaultItems: [
+            { name: "لوز نيء", grams: 12, cal100: 579, pro100: 21 }
+          ]
+        },
+        { id: "mes", baseMins: 22 * 60 + 50, text: "🛌 تفريغ الأمعاء والمثانة + حقنة الميسوسيل والنوم" }
+      ]
+    }
+  };
+
+  // 4. الصلوات والسنن الرواتب في المذهب الشافعي
+  const FARD_PRAYERS = [
+    { id: "f_fajr", text: "صلاة الفجر" },
+    { id: "f_dhuhr", text: "صلاة الظهر" },
+    { id: "f_asr", text: "صلاة العصر" },
+    { id: "f_maghrib", text: "صلاة المغرب" },
+    { id: "f_isha", text: "صلاة العشاء" }
+  ];
+
+  const SUNNAH_CONFIRMED = [
+    { id: "sc_fajr", text: "ركعتان قبل الفجر (آكد الرواتب)" },
+    { id: "sc_dhuhr_pre", text: "ركعتان قبل الظهر" },
+    { id: "sc_dhuhr_post", text: "ركعتان بعد الظهر" },
+    { id: "sc_maghrib", text: "ركعتان بعد المغرب" },
+    { id: "sc_isha", text: "ركعتان بعد العشاء" }
+  ];
+
+  const SUNNAH_EXTRA = [
+    { id: "se_dhuhr_pre", text: "ركعتان إضافيتان قبل الظهر (تتمة الأربع)" },
+    { id: "se_dhuhr_post", text: "ركعتان إضافيتان بعد الظهر (تتمة الأربع)" },
+    { id: "se_asr", text: "4 ركعات قبل العصر (مثنى مثنى)" },
+    { id: "se_maghrib", text: "ركعتان قبل المغرب" },
+    { id: "se_isha", text: "ركعتان قبل العشاء" },
+    { id: "se_witr_1", text: "صلاة الوتر — خيار 1 (أدنى الوتر: ركعة واحدة)" },
+    { id: "se_witr", text: "صلاة الوتر — خيار 2 (أدنى الكمال 3 ركعات: ركعتان + ركعة)" }
+  ];
+
+  const todayKey = "aburaslan_fit_v4_" + new Date().toLocaleDateString("en-CA");
+  const dow = new Date().getDay(); // 0=Sun, 4=Thu, 6=Sat
+  const defaultMode = dow === 6 ? "sat" : (dow === 0 || dow === 4) ? "rest" : "gym";
+
+  let state = JSON.parse(localStorage.getItem(todayKey)) || {
+    dayMode: defaultMode,
+    water: 0,
+    tasks: {},
+    taskTimes: {},
+    manualTimeSet: {},
+    completedAt: {},
+    customMeals: {},
+    snoozeUntil: {},
+    alarmFired: {},
+    prayers: {},
+    meals: [],
+    offsets: [],
+    lockEnd: null,
+    weight: localStorage.getItem("aburaslan_last_weight") || ""
+  };
+
+  if (!state.dayMode) state.dayMode = defaultMode;
+  if (!state.taskTimes) state.taskTimes = {};
+  if (!state.manualTimeSet) state.manualTimeSet = {};
+  if (!state.completedAt) state.completedAt = {};
+  if (!state.customMeals) state.customMeals = {};
+  if (!state.snoozeUntil) state.snoozeUntil = {};
+  if (!state.alarmFired) state.alarmFired = {};
+
+  function saveState() {
+    localStorage.setItem(todayKey, JSON.stringify(state));
+  }
+
+  function getActiveProgram() {
+    return PROGRAMS[state.dayMode] || PROGRAMS.gym;
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.display = "block";
+    setTimeout(() => { t.style.display = "none"; }, 2600);
+  }
+
+  function switchDayMode(mode) {
+    if (state.dayMode === mode) return;
+    state.dayMode = mode;
+    state.taskTimes = {};
+    state.manualTimeSet = {};
+    state.snoozeUntil = {};
+    state.alarmFired = {};
+    saveState();
+    renderAll();
+    showToast(`تم التبديل إلى: ${PROGRAMS[mode].label}`);
+  }
+
+  // Meal Items & Macros Helper
+  function getTaskMealItems(taskObj) {
+    if (!taskObj || !taskObj.defaultItems) return null;
+    const key = `${state.dayMode}_${taskObj.id}`;
+    return state.customMeals[key] || taskObj.defaultItems;
+  }
+
+  function calcItemsMacros(items) {
+    let cal = 0, pro = 0;
+    items.forEach(it => {
+      cal += (it.cal100 * it.grams) / 100;
+      pro += (it.pro100 * it.grams) / 100;
+    });
+    return { cal: Math.round(cal), pro: Math.round(pro * 10) / 10 };
+  }
+
+  function formatItemsSummary(items) {
+    return items.map(it => `${it.name} (${it.grams}غ)`).join(" + ");
+  }
+
+  // Time Helpers
+  function getTaskMins(id) {
+    if (typeof state.taskTimes[id] === "number") return state.taskTimes[id];
+    const t = getActiveProgram().tasks.find(x => x.id === id);
+    return t ? t.baseMins : 0;
+  }
+
+  function formatMinsArabic(totalMins) {
+    const norm = ((totalMins % 1440) + 1440) % 1440;
+    const h24 = Math.floor(norm / 60);
+    const m = norm % 60;
+    let period = "ص";
+    if (h24 >= 12 && h24 < 15) period = "ظ";
+    else if (h24 >= 15 && h24 < 18) period = "ع";
+    else if (h24 >= 18) period = "م";
+    const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+    return `${h12}:${String(m).padStart(2, "0")} ${period}`;
+  }
+
+  function minsToHHMM(totalMins) {
+    const norm = ((totalMins % 1440) + 1440) % 1440;
+    const h = Math.floor(norm / 60);
+    const m = norm % 60;
+    return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+  }
+
+  function hhmmToMins(str) {
+    const [h, m] = str.split(":").map(Number);
+    return h * 60 + m;
+  }
+
+  function getNowMins() {
+    const d = new Date();
+    return d.getHours() * 60 + d.getMinutes();
+  }
+
+  function buildSystemAlarmIntent(mins, label) {
+    const norm = ((mins % 1440) + 1440) % 1440;
+    const h = Math.floor(norm / 60);
+    const m = norm % 60;
+    return `intent:#Intent;action=android.intent.action.SET_ALARM;i.android.intent.extra.alarm.HOUR=${h};i.android.intent.extra.alarm.MINUTES=${m};S.android.intent.extra.alarm.MESSAGE=${encodeURIComponent(label)};B.android.intent.extra.alarm.SKIP_UI=false;end`;
+  }
+
+  // Shift task and all subsequent tasks
+  function shiftTaskAndFollowing(taskId, newMins, isManual = false) {
+    const tasks = getActiveProgram().tasks;
+    const idx = tasks.findIndex(t => t.id === taskId);
+    if (idx === -1) return;
+    const oldMins = getTaskMins(taskId);
+    const delta = newMins - oldMins;
+    state.taskTimes[taskId] = newMins;
+    if (isManual) state.manualTimeSet[taskId] = true;
+
+    if (delta !== 0) {
+      for (let j = idx + 1; j < tasks.length; j++) {
+        const nextId = tasks[j].id;
+        if (state.tasks[nextId]) continue; // Don't shift already completed tasks
+        const shifted = getTaskMins(nextId) + delta;
+        state.taskTimes[nextId] = shifted;
+        if (shifted > getNowMins()) {
+          state.alarmFired[nextId] = false;
+        }
+      }
+    }
+    saveState();
+    renderTasks();
+    if (delta > 0) showToast(`تم تزحيف باقي البرنامج +${delta} دقيقة`);
+    else if (delta < 0) showToast(`تم تقديم باقي البرنامج ${Math.abs(delta)} دقيقة`);
+  }
+
+  function resetScheduleTimes() {
+    if (confirm("إرجاع جميع مواعيد اليوم للساعات الأصلية؟")) {
+      state.taskTimes = {};
+      state.manualTimeSet = {};
+      state.snoozeUntil = {};
+      state.alarmFired = {};
+      saveState();
+      renderTasks();
+      showToast("تمت إعادة الساعات الأصلية");
+    }
+  }
+
+  // Manual Time Edit Modal
+  let editingTaskId = null;
+  function openTimeEdit(e, id) {
+    e.stopPropagation();
+    editingTaskId = id;
+    const t = getActiveProgram().tasks.find(x => x.id === id);
+    document.getElementById("editTaskTitle").textContent = t ? t.text : "تعديل الوقت";
+    document.getElementById("editTimeInput").value = minsToHHMM(getTaskMins(id));
+    document.getElementById("timeEditModal").style.display = "flex";
+  }
+
+  function closeTimeEdit() {
+    document.getElementById("timeEditModal").style.display = "none";
+    editingTaskId = null;
+  }
+
+  function saveEditedTime() {
+    if (!editingTaskId) return;
+    const val = document.getElementById("editTimeInput").value;
+    if (val) {
+      const newMins = hhmmToMins(val);
+      state.manualTimeSet[editingTaskId] = true;
+      shiftTaskAndFollowing(editingTaskId, newMins, true);
+
+      // If this task is already completed and has a water lock, recalculate remaining lock from the edited time!
+      const t = getActiveProgram().tasks.find(x => x.id === editingTaskId);
+      if (t && t.lock && state.tasks[editingTaskId]) {
+        applySmartWaterLock(editingTaskId, t.lock, true);
+      }
+      showToast(`تم تثبيت الوقت على ${formatMinsArabic(newMins)}`);
+    }
+    closeTimeEdit();
+  }
+
+  // Meal Customizer Modal Logic
+  let editingMealTaskId = null;
+  let tempMealItems = [];
+
+  function openMealEdit(e, taskId) {
+    e.stopPropagation();
+    editingMealTaskId = taskId;
+    const t = getActiveProgram().tasks.find(x => x.id === taskId);
+    if (!t) return;
+    document.getElementById("mealEditTitle").textContent = `تخصيص: ${t.text}`;
+    tempMealItems = JSON.parse(JSON.stringify(getTaskMealItems(t)));
+
+    const sel = document.getElementById("mealAddSelect");
+    sel.innerHTML = "";
+    ALL_FOOD_ITEMS.forEach((f, idx) => {
+      const opt = document.createElement("option");
+      opt.value = idx;
+      opt.textContent = `${f.name} (${f.cal} سعرة / 100غ)`;
+      sel.appendChild(opt);
+    });
+
+    renderMealIngredientsEditor();
+    document.getElementById("mealEditModal").style.display = "flex";
+  }
+
+  function closeMealEdit() {
+    document.getElementById("mealEditModal").style.display = "none";
+    editingMealTaskId = null;
+  }
+
+  function renderMealIngredientsEditor() {
+    const box = document.getElementById("mealIngredientsList");
+    box.innerHTML = "";
+    tempMealItems.forEach((it, idx) => {
+      const itemCal = Math.round((it.cal100 * it.grams) / 100);
+      const row = document.createElement("div");
+      row.className = "ing-row";
+      row.innerHTML = `
+        <div>
+          <div style="font-weight:700;">${it.name}</div>
+          <div style="font-size:10px; color:var(--muted);">${itemCal} سعرة</div>
+        </div>
+        <input type="number" value="${it.grams}" min="0" oninput="updateTempIngGrams(${idx}, this.value)" />
+        <button class="del-btn" onclick="removeTempIng(${idx})">×</button>
+      `;
+      box.appendChild(row);
+    });
+    const totals = calcItemsMacros(tempMealItems);
+    document.getElementById("mealEditSummary").textContent = `الإجمالي: ${totals.cal} سعرة | ${totals.pro} غ بروتين`;
+  }
+
+  function updateTempIngGrams(idx, val) {
+    tempMealItems[idx].grams = Math.max(0, parseFloat(val) || 0);
+    renderMealIngredientsEditor();
+  }
+
+  function removeTempIng(idx) {
+    tempMealItems.splice(idx, 1);
+    renderMealIngredientsEditor();
+  }
+
+  function addIngredientToMeal() {
+    const idx = parseInt(document.getElementById("mealAddSelect").value) || 0;
+    const f = ALL_FOOD_ITEMS[idx];
+    const grams = parseFloat(document.getElementById("mealAddGrams").value) || 100;
+    if (!f || grams <= 0) return;
+    tempMealItems.push({ name: f.name, grams: grams, cal100: f.cal, pro100: f.pro });
+    renderMealIngredientsEditor();
+  }
+
+  function saveMealCustomization() {
+    if (!editingMealTaskId) return;
+    const key = `${state.dayMode}_${editingMealTaskId}`;
+    state.customMeals[key] = tempMealItems.filter(it => it.grams > 0);
+
+    // If task is already checked, update its entry in state.meals
+    if (state.tasks[editingMealTaskId]) {
+      const t = getActiveProgram().tasks.find(x => x.id === editingMealTaskId);
+      const items = getTaskMealItems(t);
+      const totals = calcItemsMacros(items);
+      const existingIdx = state.meals.findIndex(m => m.taskId === editingMealTaskId);
+      if (existingIdx !== -1) {
+        state.meals[existingIdx].cal = totals.cal;
+        state.meals[existingIdx].pro = totals.pro;
+        state.meals[existingIdx].name = `${t.text.replace(/^[^\s]+\s/, "")} [${formatItemsSummary(items)}]`;
+      }
+      renderMeals();
+    }
+
+    saveState();
+    renderTasks();
+    closeMealEdit();
+    showToast("تم تحديث أصناف وأوزان الوجبة");
+  }
+
+  // Smart Water Lock Calculation
+  function applySmartWaterLock(taskId, lockMins, useStoredScheduleTime) {
+    const now = new Date();
+    const lockDurationMs = lockMins * 60 * 1000;
+
+    if (useStoredScheduleTime) {
+      const schedMins = getTaskMins(taskId);
+      const schedMs = new Date(now.getFullYear(), now.getMonth(), now.getDate(), Math.floor(schedMins / 60), schedMins % 60, 0).getTime();
+      if (now.getTime() >= schedMs) {
+        const targetEnd = schedMs + lockDurationMs;
+        const remainingMs = targetEnd - now.getTime();
+        if (remainingMs > 0) {
+          state.lockEnd = targetEnd;
+          updateLockUI();
+          return `🔒 متبقي من القفل ${Math.ceil(remainingMs / 60000)} د`;
+        } else {
+          state.lockEnd = null;
+          updateLockUI();
+          return `✅ وقت قفل المي انتهى أصلاً`;
+        }
+      }
+    }
+
+    state.lockEnd = now.getTime() + lockDurationMs;
+    updateLockUI();
+    return `🔒 قفل مي ${lockMins} د`;
+  }
+
+  // Daily Tasks Toggle
+  function toggleTask(id, forceDone = null) {
+    unlockAudio();
+    const newState = forceDone !== null ? forceDone : !state.tasks[id];
+    state.tasks[id] = newState;
+    if (newState) delete state.snoozeUntil[id];
+
+    const taskObj = getActiveProgram().tasks.find(t => t.id === id);
+    let toastParts = [];
+
+    if (newState) {
+      const nowMins = getNowMins();
+      state.completedAt[id] = formatMinsArabic(nowMins);
+
+      // If user didn't manually lock the time beforehand, set to actual tap minute and shift following tasks!
+      if (!state.manualTimeSet[id]) {
+        shiftTaskAndFollowing(id, nowMins, false);
+      }
+
+      if (taskObj && taskObj.defaultItems) {
+        const items = getTaskMealItems(taskObj);
+        const totals = calcItemsMacros(items);
+        const mealLabel = `${taskObj.text.replace(/^[^\s]+\s/, "")} [${formatItemsSummary(items)}]`;
+        const exists = state.meals.some(m => m.taskId === id);
+        if (!exists) {
+          state.meals.push({ taskId: id, name: mealLabel, cal: totals.cal, pro: totals.pro });
+          toastParts.push(`+${totals.cal} سعرة`);
+        }
+        renderMeals();
+      }
+
+      if (taskObj && taskObj.water) {
+        state.water = Math.max(0, state.water + taskObj.water);
+        toastParts.push(`+${taskObj.water} مل مي`);
+        renderWater();
+      }
+
+      if (taskObj && taskObj.lock) {
+        const lockMsg = applySmartWaterLock(id, taskObj.lock, !!state.manualTimeSet[id]);
+        toastParts.push(lockMsg);
+      }
+
+      if (toastParts.length > 0) {
+        showToast(`تم (${toastParts.join(" | ")})`);
+      }
+    } else {
+      delete state.completedAt[id];
+      if (taskObj && taskObj.defaultItems) {
+        state.meals = state.meals.filter(m => m.taskId !== id);
+        renderMeals();
+      }
+      if (taskObj && taskObj.water) {
+        state.water = Math.max(0, state.water - taskObj.water);
+        renderWater();
+      }
+    }
+
+    saveState();
+    renderTasks();
+  }
+
+  function renderTasks() {
+    const list = document.getElementById("tasksList");
+    list.innerHTML = "";
+    const tasks = getActiveProgram().tasks;
+    let doneCount = 0;
+
+    tasks.forEach(t => {
+      const isDone = !!state.tasks[t.id];
+      const isSnoozed = !!state.snoozeUntil[t.id];
+      if (isDone) doneCount++;
+      const schedMins = getTaskMins(t.id);
+      const timeLabel = formatMinsArabic(schedMins);
+      const alarmHref = buildSystemAlarmIntent(schedMins, t.text);
+
+      let mealHtml = "";
+      if (t.defaultItems) {
+        const items = getTaskMealItems(t);
+        const totals = calcItemsMacros(items);
+        mealHtml = `
+          <span class="task-sub">${formatItemsSummary(items)}</span>
+          <div class="task-badges">
+            <span class="pill-tag pill-cal">${totals.cal} سعرة • ${totals.pro}غ بروتين</span>
+            ${t.lock ? `<span class="pill-tag pill-lock">🔒 قفل ${t.lock} د</span>` : ""}
+            <button class="edit-meal-btn" onclick="openMealEdit(event, '${t.id}')">✏️ تعديل الأصناف والأوزان</button>
+          </div>
+        `;
+      } else {
+        mealHtml = `
+          ${t.sub ? `<span class="task-sub">${t.sub}</span>` : ""}
+          ${t.lock ? `<div class="task-badges"><span class="pill-tag pill-lock">🔒 قفل مي تلقائي ${t.lock} د</span></div>` : ""}
+        `;
+      }
+
+      const div = document.createElement("div");
+      div.className = "task-item" + (t.defaultItems ? " meal-task" : "") + (isDone ? " done" : "");
+      div.innerHTML = `
+        <div class="checkbox" onclick="toggleTask('${t.id}')">${isDone ? "✓" : ""}</div>
+        <div class="time-col">
+          <span class="task-time ${isSnoozed ? "snoozed" : ""}" onclick="openTimeEdit(event, '${t.id}')" title="اضغط لتعديل الوقت">${timeLabel}${isSnoozed ? " 💤" : ""}</span>
+          ${!isDone ? `<a href="${alarmHref}" class="sys-alarm-link" title="ضبط منبّه سامسونغ">⏰ منبّه</a>` : ""}
+        </div>
+        <div class="task-body">
+          <span class="task-text" onclick="toggleTask('${t.id}')">${t.text}</span>
+          ${mealHtml}
+        </div>
+      `;
+      list.appendChild(div);
+    });
+
+    document.getElementById("tasksProgress").textContent = `${doneCount}/${tasks.length}`;
+  }
+
+  // Audio & Repeating Alarm System
+  let audioCtx = null;
+  let alarmInterval = null;
+  let activeAlarm = null;
+
+  function unlockAudio() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+    } catch (e) {}
+  }
+
+  function enableAlertsAndAudio() {
+    unlockAudio();
+    playSingleChime();
+    if ("Notification" in window && Notification.permission !== "granted") {
+      Notification.requestPermission().then(perm => {
+        if (perm === "granted") {
+          updatePermBanner();
+          showToast("تم تفعيل الصوت والإشعارات");
+        }
+      });
+    } else {
+      updatePermBanner();
+      showToast("تم تفعيل نغمة التنبيه");
+    }
+  }
+
+  function updatePermBanner() {
+    const banner = document.getElementById("permBanner");
+    if ("Notification" in window && Notification.permission === "granted") {
+      banner.classList.add("active");
+      banner.textContent = "✅ الإشعارات مفعّلة (استخدم زر ⏰ منبّه لضبط منبّه سامسونغ الأصلي)";
+    }
+  }
+
+  function playSingleChime() {
+    try {
+      unlockAudio();
+      const notes = [587.33, 783.99, 1046.50];
+      notes.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.22);
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime + i * 0.22);
+        gain.gain.exponentialRampToValueAtTime(0.25, audioCtx.currentTime + i * 0.22 + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + i * 0.22 + 0.75);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(audioCtx.currentTime + i * 0.22);
+        osc.stop(audioCtx.currentTime + i * 0.22 + 0.8);
+      });
+      if (navigator.vibrate) navigator.vibrate([300, 120, 300]);
+    } catch (e) {}
+  }
+
+  function startRepeatingAlarm(payload) {
+    if (activeAlarm) return;
+    activeAlarm = payload;
+    const modal = document.getElementById("alarmModal");
+    const taskActions = document.getElementById("alarmTaskActions");
+    const lockActions = document.getElementById("alarmLockActions");
+
+    if (payload.type === "task") {
+      const t = getActiveProgram().tasks.find(x => x.id === payload.taskId);
+      if (!t) { activeAlarm = null; return; }
+      document.getElementById("alarmIcon").textContent = "⏰";
+      document.getElementById("alarmTitle").textContent = `${formatMinsArabic(getTaskMins(t.id))} — حان الموعد`;
+      document.getElementById("alarmDesc").textContent = t.text;
+      taskActions.style.display = "grid";
+      lockActions.style.display = "none";
+      sendSystemNotification("⏰ موعد بالبرنامج الصحي", t.text);
+    } else if (payload.type === "lock") {
+      document.getElementById("alarmIcon").textContent = "💧";
+      document.getElementById("alarmTitle").textContent = "انتهى وقت قفل الماء!";
+      document.getElementById("alarmDesc").textContent = "اكتمل وقت الهضم — تقدر تشرب رشفات مي وتاكل حبة الفاكهة هلا.";
+      taskActions.style.display = "none";
+      lockActions.style.display = "block";
+      sendSystemNotification("💧 باب الماء مفتوح الآن", "انتهى مؤقت قفل الماء وتقدر تشرب هلا.");
+    }
+
+    modal.style.display = "flex";
+    playSingleChime();
+    alarmInterval = setInterval(playSingleChime, 3500);
+  }
+
+  function stopRepeatingAlarm() {
+    if (alarmInterval) {
+      clearInterval(alarmInterval);
+      alarmInterval = null;
+    }
+    activeAlarm = null;
+    document.getElementById("alarmModal").style.display = "none";
+  }
+
+  function sendSystemNotification(title, body) {
+    if ("Notification" in window && Notification.permission === "granted") {
+      try {
+        new Notification(title, {
+          body: body,
+          tag: "aburaslan-fit-alarm",
+          renotify: true,
+          requireInteraction: true,
+          vibrate: [300, 150, 300]
+        });
+      } catch (e) {}
+    }
+  }
+
+  function confirmAlarmDone() {
+    if (!activeAlarm || activeAlarm.type !== "task") return;
+    const taskId = activeAlarm.taskId;
+    stopRepeatingAlarm();
+    delete state.snoozeUntil[taskId];
+    if (!state.tasks[taskId]) {
+      toggleTask(taskId, true);
+    }
+  }
+
+  function snoozeAlarm5() {
+    if (!activeAlarm || activeAlarm.type !== "task") return;
+    const taskId = activeAlarm.taskId;
+    stopRepeatingAlarm();
+    state.snoozeUntil[taskId] = Date.now() + 5 * 60 * 1000;
+    saveState();
+    renderTasks();
+    showToast("💤 غفوة 5 دقائق — رح يرجع يرن");
+  }
+
+  function dismissLockAlarm() {
+    stopRepeatingAlarm();
+  }
+
+  function checkScheduledAlarms() {
+    const now = Date.now();
+    const nowMins = getNowMins();
+    const tasks = getActiveProgram().tasks;
+
+    for (const t of tasks) {
+      if (state.tasks[t.id]) continue;
+
+      if (state.snoozeUntil[t.id]) {
+        if (now >= state.snoozeUntil[t.id]) {
+          delete state.snoozeUntil[t.id];
+          saveState();
+          startRepeatingAlarm({ type: "task", taskId: t.id });
+          return;
+        }
+        continue;
+      }
+
+      const schedMins = getTaskMins(t.id);
+      if (!state.alarmFired[t.id] && nowMins >= schedMins && (nowMins - schedMins) <= 2) {
+        state.alarmFired[t.id] = true;
+        saveState();
+        startRepeatingAlarm({ type: "task", taskId: t.id });
+        return;
+      }
+    }
+  }
+
+  // Water Lock
+  function startWaterLock(mins) {
+    unlockAudio();
+    state.lockEnd = Date.now() + mins * 60 * 1000;
+    saveState();
+    updateLockUI();
+    showToast(`🔒 تم قفل الماء لمدة ${mins} دقيقة`);
+  }
+
+  function cancelWaterLock() {
+    state.lockEnd = null;
+    saveState();
+    updateLockUI();
+  }
+
+  function updateLockUI() {
+    const box = document.getElementById("lockStatusBox");
+    const txt = document.getElementById("lockStatusText");
+    const timer = document.getElementById("lockTimerText");
+    const cancelBtn = document.getElementById("cancelLockBtn");
+    const sysAlarmBtn = document.getElementById("lockSysAlarmBtn");
+
+    if (!state.lockEnd) {
+      box.className = "lock-box lock-open";
+      txt.textContent = "✅ باب الماء مفتوح — اشرب رشفات هادية";
+      timer.style.display = "none";
+      cancelBtn.style.display = "none";
+      sysAlarmBtn.style.display = "none";
+      return;
+    }
+
+    const diff = state.lockEnd - Date.now();
+    if (diff <= 0) {
+      state.lockEnd = null;
+      saveState();
+      updateLockUI();
+      startRepeatingAlarm({ type: "lock" });
+      return;
+    }
+
+    const endD = new Date(state.lockEnd);
+    const endMins = endD.getHours() * 60 + endD.getMinutes();
+    sysAlarmBtn.href = buildSystemAlarmIntent(endMins, "فتح باب الماء بعد الهضم");
+    sysAlarmBtn.style.display = "inline-flex";
+
+    const m = Math.floor(diff / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    box.className = "lock-box lock-closed";
+    txt.textContent = `🔒 ممنوع السوائل (يفتح الساعة ${formatMinsArabic(endMins)})`;
+    timer.style.display = "block";
+    timer.textContent = `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    cancelBtn.style.display = "block";
+  }
+
+  // Water Counter
+  function addWater(ml) {
+    unlockAudio();
+    state.water = Math.max(0, state.water + ml);
+    saveState();
+    renderWater();
+  }
+
+  function renderWater() {
+    const goal = getActiveProgram().waterGoal;
+    document.getElementById("waterGoalLabel").textContent = goal.toLocaleString("en-US");
+    document.getElementById("waterVal").textContent = state.water.toLocaleString("en-US");
+    document.getElementById("waterRem").textContent = Math.max(0, goal - state.water).toLocaleString("en-US");
+    const pct = Math.min(100, (state.water / goal) * 100);
+    document.getElementById("waterBar").style.width = pct + "%";
+  }
+
+  // Categorized Food Calculator
+  let currentCategory = "food";
+  function setFoodCategory(cat) {
+    currentCategory = cat;
+    document.getElementById("catFoodBtn").classList.toggle("active", cat === "food");
+    document.getElementById("catFruitBtn").classList.toggle("active", cat === "fruit");
+    populateFoodSelect();
+  }
+
+  function getActiveFoodList() {
+    return currentCategory === "food" ? SAVORY_FOODS : SWEET_DAIRY_FOODS;
+  }
+
+  function populateFoodSelect() {
+    const sel = document.getElementById("foodSelect");
+    sel.innerHTML = "";
+    const list = getActiveFoodList();
+    list.forEach((f, idx) => {
+      const opt = document.createElement("option");
+      opt.value = idx;
+      opt.textContent = f.custom ? f.name : `${f.name} (${f.cal} سعرة / 100غ)`;
+      sel.appendChild(opt);
+    });
+    updateFoodPreview();
+  }
+
+  function updateFoodPreview() {
+    const list = getActiveFoodList();
+    const idx = parseInt(document.getElementById("foodSelect").value) || 0;
+    const f = list[idx];
+    const grams = parseFloat(document.getElementById("foodGrams").value) || 0;
+    const customBox = document.getElementById("customMacroInputs");
+
+    if (f && f.custom) {
+      customBox.style.display = "grid";
+      const c100 = parseFloat(document.getElementById("customCal100").value) || 0;
+      const p100 = parseFloat(document.getElementById("customPro100").value) || 0;
+      const cal = Math.round((c100 * grams) / 100);
+      const pro = Math.round(((p100 * grams) / 100) * 10) / 10;
+      document.getElementById("foodPreview").textContent = `النتيجة: ${cal} سعرة | ${pro} غ بروتين`;
+    } else if (f) {
+      customBox.style.display = "none";
+      const cal = Math.round((f.cal * grams) / 100);
+      const pro = Math.round(((f.pro * grams) / 100) * 10) / 10;
+      document.getElementById("foodPreview").textContent = `النتيجة: ${cal} سعرة | ${pro} غ بروتين`;
+    }
+  }
+
+  function addFoodItem() {
+    const list = getActiveFoodList();
+    const idx = parseInt(document.getElementById("foodSelect").value) || 0;
+    const f = list[idx];
+    const grams = parseFloat(document.getElementById("foodGrams").value) || 0;
+    if (!f || grams <= 0) return;
+
+    let c100 = f.cal, p100 = f.pro;
+    if (f.custom) {
+      c100 = parseFloat(document.getElementById("customCal100").value) || 0;
+      p100 = parseFloat(document.getElementById("customPro100").value) || 0;
+    }
+
+    const cal = Math.round((c100 * grams) / 100);
+    const pro = Math.round(((p100 * grams) / 100) * 10) / 10;
+    state.meals.push({ name: `${f.name} (${grams}غ)`, cal, pro });
+    saveState();
+    renderMeals();
+    showToast(`تمت الإضافة (+${cal} سعرة)`);
+  }
+
+  function deleteMeal(i) {
+    const removed = state.meals[i];
+    if (removed && removed.taskId) {
+      state.tasks[removed.taskId] = false;
+      delete state.completedAt[removed.taskId];
+      renderTasks();
+    }
+    if (removed && removed.offsetId) {
+      state.offsets = (state.offsets || []).filter(o => o.id !== removed.offsetId);
+      renderOffsets();
+    }
+    state.meals.splice(i, 1);
+    saveState();
+    renderMeals();
+  }
+
+  function renderMeals() {
+    const list = document.getElementById("mealsList");
+    let totalCal = 0, totalPro = 0;
+
+    if (state.meals.length === 0) {
+      list.innerHTML = `<div style="font-size:12px; color:var(--muted); text-align:center;">ضع علامة ✓ على أي وجبة بالرئيسية أو أضفها هنا</div>`;
+    } else {
+      list.innerHTML = "";
+      state.meals.forEach((m, i) => {
+        totalCal += m.cal;
+        totalPro += m.pro;
+        const row = document.createElement("div");
+        row.className = "meal-row";
+        row.innerHTML = `
+          <div>
+            <div style="font-weight:700;">${m.name}</div>
+            <div style="font-size:11px; color:var(--muted);">${m.cal} سعرة • ${m.pro} غ بروتين</div>
+          </div>
+          <button class="del-btn" onclick="deleteMeal(${i})">×</button>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    const prog = getActiveProgram();
+    const goal = prog.calGoal;
+    document.getElementById("calGoalLabel").textContent = goal.toLocaleString("en-US");
+    document.getElementById("proGoalLabel").textContent = prog.proGoal;
+    document.getElementById("calVal").textContent = totalCal.toLocaleString("en-US");
+    document.getElementById("calRem").textContent = (goal - totalCal).toLocaleString("en-US");
+    document.getElementById("proVal").textContent = Math.round(totalPro) + " غ";
+    const pct = Math.min(100, (totalCal / goal) * 100);
+    const bar = document.getElementById("calBar");
+    bar.style.width = pct + "%";
+    bar.style.background = totalCal > goal ? "var(--red)" : "var(--green)";
+  }
+
+  // Prayers & Shafi'i Rawatib
+  function togglePrayer(id) {
+    state.prayers[id] = !state.prayers[id];
+    saveState();
+    renderPrayers();
+  }
+
+  function renderPrayerGroup(items, containerId, progressId) {
+    const box = document.getElementById(containerId);
+    box.innerHTML = "";
+    let done = 0;
+    items.forEach(item => {
+      const isDone = !!state.prayers[item.id];
+      if (isDone) done++;
+      const div = document.createElement("div");
+      div.className = "task-item prayer-task" + (isDone ? " done" : "");
+      div.onclick = () => togglePrayer(item.id);
+      div.innerHTML = `
+        <div class="checkbox">${isDone ? "✓" : ""}</div>
+        <div class="task-body"><span class="task-text">${item.text}</span></div>
+      `;
+      box.appendChild(div);
+    });
+    document.getElementById(progressId).textContent = `${done}/${items.length}`;
+  }
+
+  function renderPrayers() {
+    renderPrayerGroup(FARD_PRAYERS, "fardList", "fardProgress");
+    renderPrayerGroup(SUNNAH_CONFIRMED, "sunnahConfirmedList", "sunnahConfirmedProgress");
+    renderPrayerGroup(SUNNAH_EXTRA, "sunnahExtraList", "sunnahExtraProgress");
+  }
+
+  // Weight & Offset
+  function saveWeight() {
+    const w = parseFloat(document.getElementById("weightInput").value);
+    if (!w) return;
+    state.weight = w;
+    localStorage.setItem("aburaslan_last_weight", w);
+    saveState();
+    renderWeight();
+    showToast("تم حفظ الوزن");
+  }
+
+  function renderWeight() {
+    if (!state.weight) return;
+    document.getElementById("weightInput").value = state.weight;
+    const diff = (state.weight - 108.6).toFixed(1);
+    const el = document.getElementById("weightDiffText");
+    if (diff > 0) {
+      el.innerHTML = `الوزن المسجّل: <strong>${state.weight} كغ</strong> — باقي <strong style="color:var(--amber);">${diff} كغ</strong> للوصول لهدف السبت (108.6 كغ).`;
+    } else {
+      el.innerHTML = `الوزن المسجّل: <strong style="color:var(--green);">${state.weight} كغ</strong> — حققت هدف السبت!`;
+    }
+  }
+
+  function calcOffset() {
+    const nameInput = document.getElementById("extraNameInput");
+    const calInput = document.getElementById("extraCalInput");
+    const foodName = nameInput.value.trim() || "أكلة خارج البرنامج";
+    const extra = parseFloat(calInput.value) || 0;
+    const res = document.getElementById("offsetResult");
+    if (extra <= 0) return;
+
+    if (!state.offsets) state.offsets = [];
+    const offsetId = "off_" + Date.now();
+    const timeStr = new Date().toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" });
+
+    state.offsets.push({ id: offsetId, name: foodName, cal: extra, time: timeStr });
+    state.meals.push({ offsetId: offsetId, name: `🚨 طوارئ: ${foodName}`, cal: extra, pro: 0 });
+    saveState();
+    renderMeals();
+    renderOffsets();
+
+    nameInput.value = "";
+    calInput.value = "";
+
+    res.style.display = "block";
+    let steps = [];
+    let rem = extra;
+
+    if (rem > 0) {
+      steps.push("• <strong>الغداء:</strong> قلّل البرغل من 200غ إلى 50غ أو ألغِه (يوفّر حتى <strong>170 سعرة</strong>).");
+      rem -= 170;
+    }
+    if (rem > 0) {
+      steps.push("• <strong>المكسرات قبل النوم:</strong> ألغِ كمشة المكسرات الليلة (توفّر <strong>120 سعرة</strong>).");
+      rem -= 120;
+    }
+    if (rem > 0) {
+      steps.push("• <strong>الفواكه:</strong> اكتفي بحبة فاكهة واحدة بعد الفطور وألغِ حبة العصر والعشاء (توفّر <strong>130 سعرة</strong>).");
+      rem -= 130;
+    }
+    if (rem > 0) {
+      steps.push(`• <strong>باقي فرق (${Math.round(rem)} سعرة):</strong> زيد 15 دقيقة مشي سريع بعد التمرين.`);
+    }
+    res.innerHTML = `<div style="font-weight:800; color:var(--amber); margin-bottom:5px;">خطة تصفير (${foodName} - ${extra} سعرة) بدون لمس البروتين:</div>` + steps.join("<br>");
+    showToast(`تم تسجيل "${foodName}" في الطوارئ والتقرير`);
+  }
+
+  function deleteOffset(id) {
+    state.offsets = (state.offsets || []).filter(o => o.id !== id);
+    state.meals = state.meals.filter(m => m.offsetId !== id);
+    saveState();
+    renderOffsets();
+    renderMeals();
+  }
+
+  function renderOffsets() {
+    const list = document.getElementById("offsetLogList");
+    if (!list) return;
+    const offsets = state.offsets || [];
+    if (offsets.length === 0) {
+      list.innerHTML = "";
+      return;
+    }
+    list.innerHTML = `<div style="font-size:11px; color:var(--amber); font-weight:700; margin-bottom:5px;">سجل الطوارئ المسجّل اليوم (يظهر بالتقرير):</div>`;
+    offsets.forEach(o => {
+      const row = document.createElement("div");
+      row.className = "meal-row";
+      row.style.borderRight = "3px solid var(--amber)";
+      row.innerHTML = `
+        <div>
+          <div style="font-weight:700;">${o.name} <span style="font-size:11px; color:var(--muted);">(${o.time})</span></div>
+          <div style="font-size:11px; color:var(--amber);">+${o.cal} سعرة إضافية</div>
+        </div>
+        <button class="del-btn" onclick="deleteOffset('${o.id}')">×</button>
+      `;
+      list.appendChild(row);
+    });
+  }
+
+  function copyDailyReport() {
+    const prog = getActiveProgram();
+    const totalCal = state.meals.reduce((a, b) => a + b.cal, 0);
+    const totalPro = Math.round(state.meals.reduce((a, b) => a + b.pro, 0));
+    const doneTasks = prog.tasks.filter(t => state.tasks[t.id]).map(t => `${formatMinsArabic(getTaskMins(t.id))} — ${t.text}`).join("\n- ") || "لا يوجد";
+    const fardDone = FARD_PRAYERS.filter(p => state.prayers[p.id]).length;
+    const rawatibDone = [...SUNNAH_CONFIRMED, ...SUNNAH_EXTRA].filter(p => state.prayers[p.id]).length;
+    const regularMeals = state.meals.filter(m => !m.offsetId);
+    const mealsTxt = regularMeals.map(m => `- ${m.name} (${m.cal} سعرة | ${m.pro}غ بروتين)`).join("\n") || "- لا يوجد";
+    const offsets = state.offsets || [];
+    const offsetsTxt = offsets.map(o => `- ${o.name}: ${o.cal} سعرة (الساعة ${o.time})`).join("\n") || "- لا يوجد (التزام كامل)";
+
+    const report = `تقرير اليوم (${new Date().toLocaleDateString("ar-EG")}) — [${prog.label}]:
+💧 الماء: ${state.water} / ${prog.waterGoal.toLocaleString("en-US")} مل
+🔥 السعرات: ${totalCal} / ${prog.calGoal.toLocaleString("en-US")} سعرة | البروتين: ${totalPro} / ${prog.proGoal} غ
+⚖️ الوزن: ${state.weight ? state.weight + " كغ" : "غير مسجّل"}
+🕌 الصلاة: الفروض (${fardDone}/5) | السنن الرواتب والوتر (${rawatibDone}/12)
+✅ المهام المنجزة وأوقاتها:\n- ${doneTasks}
+🍽️ الوجبات والأوزان المحسوبة:\n${mealsTxt}
+🚨 سجل الطوارئ (خارج البرنامج):\n${offsetsTxt}`;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(report).then(() => showToast("تم نسخ التقرير! الصقه بالمحادثة"));
+    } else {
+      const ta = document.createElement("textarea");
+      ta.value = report;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      showToast("تم نسخ التقرير! الصقه بالمحادثة");
+    }
+  }
+
+  function resetToday() {
+    if (confirm("هل تريد تصفير عدّاد الماء والوجبات والصلوات لبدء يوم جديد؟")) {
+      localStorage.removeItem(todayKey);
+      location.reload();
+    }
+  }
+
+  function switchTab(tab, btn) {
+    document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+    document.querySelectorAll(".nav-btn").forEach(el => el.classList.remove("active"));
+    document.getElementById("tab-" + tab).classList.add("active");
+    btn.classList.add("active");
+  }
+
+  function renderHeaderModes() {
+    ["gym", "sat", "rest"].forEach(m => {
+      document.getElementById("mode-" + m).classList.toggle("active", state.dayMode === m);
+    });
+    const prog = getActiveProgram();
+    document.getElementById("activeTargetBadge").textContent = `${prog.waterGoal.toLocaleString("en-US")} مل`;
+  }
+
+  function renderAll() {
+    renderHeaderModes();
+    renderWater();
+    renderTasks();
+    renderMeals();
+    renderPrayers();
+    renderWeight();
+    renderOffsets();
+    updateLockUI();
+  }
+
+  // Init
+  const dateStr = new Date().toLocaleDateString("ar-EG", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  document.getElementById("dateDisplay").textContent = dateStr;
+
+  document.body.addEventListener("pointerdown", unlockAudio, { once: true });
+  updatePermBanner();
+  populateFoodSelect();
+  renderAll();
+
+  setInterval(() => {
+    updateLockUI();
+    checkScheduledAlarms();
+  }, 1000);
+</script>
+</body>
+</html>
