@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -276,7 +276,7 @@
 
     <details style="background:#090d14; border:1px solid var(--border); border-radius:10px; padding:8px; margin-bottom:10px;">
       <summary style="font-size:11px; font-weight:800; color:var(--amber); cursor:pointer;">📋 كود الربط السحابي المجاني (Google Apps Script)</summary>
-      <p style="font-size:11px; color:var(--muted); margin-top:5px;">افتح <strong>script.google.com</strong> $\leftarrow$ مشروع جديد $\leftarrow$ الصق الكود $\leftarrow$ انشره كـ Web App (Anyone) + فعّل مشغّل زمني (Trigger) كل دقيقة لدالة <code>checkAlarms</code>:</p>
+<p style="font-size:11px; color:var(--muted); margin-top:5px;">افتح <strong>script.google.com</strong> ← مشروع جديد ← الصق الكود ← انشره كـ Web App (Anyone) + فعّل مشغّل زمني (Trigger) كل دقيقة لدالة <code>checkAlarms</code>:</p>
       <button class="btn btn-amber" style="width:100%; padding:6px; font-size:11px; margin-top:6px;" onclick="copyGasSnippet()">📋 نسخ كود السكربت</button>
       <pre id="gasCodeSnippet" class="code-box"></pre>
     </details>
@@ -830,6 +830,9 @@
     { id: "se_witr", text: "صلاة الوتر — خيار 2 (أدنى الكمال 3 ركعات: ركعتان + ركعة)" }
   ];
 
+    const esc = s => String(s).replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
   // Dynamic Date & Auto-Rollover State
   const STORAGE_PREFIX = "aburaslan_fit_v6_";
   function getTodayDateStr() {
@@ -944,8 +947,16 @@
     setTimeout(() => { t.style.display = "none"; }, 2600);
   }
 
-  function switchDayMode(mode) {
+    function switchDayMode(mode) {
     if (state.dayMode === mode) return;
+    if (Object.values(state.tasks).some(Boolean) &&
+        !confirm("التبديل رح يصفّر المهام المنجزة والوجبات المرتبطة فيها. متأكد؟")) return;
+    getActiveProgram().tasks.forEach(t => {
+      if (state.tasks[t.id]) state.water = Math.max(0, state.water - getTaskWater(t));
+    });
+    state.tasks = {}; state.completedAt = {};
+    state.meals = state.meals.filter(m => !m.taskId);
+    state.eatEnd = null; state.lockEnd = null; state.lockOwnerTaskId = null;
     state.dayMode = mode;
     state.taskTimes = {};
     state.manualTimeSet = {};
@@ -1396,7 +1407,7 @@
       row.className = "ing-row";
       row.innerHTML = `
         <div>
-          <div style="font-weight:700;">${it.name}</div>
+          <div style="font-weight:700;">${esc(it.name)}</div>
           <div style="font-size:10px; color:var(--muted);">${itemCal} سعرة</div>
         </div>
         <input type="number" value="${it.grams}" min="0" oninput="updateTempIngGrams(${idx}, this.value)" />
@@ -1630,33 +1641,34 @@
 
   // Cloud Telegram Push Integration
   const GAS_TEMPLATE = `function doPost(e) {
-  var data = JSON.parse(e.postData.contents);
-  PropertiesService.getScriptProperties().setProperty("SCHEDULE_PAYLOAD", JSON.stringify(data));
+  var raw = (e.parameter && e.parameter.data) || (e.postData && e.postData.contents);
+  PropertiesService.getScriptProperties().setProperty("SCHEDULE_PAYLOAD", raw);
   return ContentService.createTextOutput("OK");
 }
 
 function checkAlarms() {
-  var raw = PropertiesService.getScriptProperties().getProperty("SCHEDULE_PAYLOAD");
+  var props = PropertiesService.getScriptProperties();
+  var raw = props.getProperty("SCHEDULE_PAYLOAD");
   if (!raw) return;
-  var payload = JSON.parse(raw);
+  var p = JSON.parse(raw);
   var now = new Date();
   var today = Utilities.formatDate(now, Session.getScriptTimeZone(), "yyyy-MM-dd");
-  if (payload.date !== today) return;
+  if (p.date !== today) return;
   var nowMins = now.getHours() * 60 + now.getMinutes();
-  var sent = JSON.parse(PropertiesService.getScriptProperties().getProperty("SENT_" + today) || "{}");
-
-  payload.tasks.forEach(function(t) {
-    if (!sent[t.id] && nowMins === t.mins) {
-      var url = "https://api.telegram.org/bot" + payload.botToken + "/sendMessage";
-      UrlFetchApp.fetch(url, {
-        method: "post",
-        contentType: "application/json",
-        payload: JSON.stringify({ chat_id: payload.chatId, text: "⏰ موعدك الآن:\\n" + t.text })
+  var sent = JSON.parse(props.getProperty("SENT_" + today) || "{}");
+  var done = p.completedIds || [];
+  p.tasks.forEach(function(t) {
+    var key = t.id + "_" + t.mins;
+    if (sent[key] || done.indexOf(t.id) !== -1) return;
+    if (nowMins >= t.mins && nowMins - t.mins <= 2) {
+      UrlFetchApp.fetch("https://api.telegram.org/bot" + p.botToken + "/sendMessage", {
+        method: "post", contentType: "application/json",
+        payload: JSON.stringify({ chat_id: p.chatId, text: "⏰ موعدك الآن:\\n" + t.text })
       });
-      sent[t.id] = true;
+      sent[key] = true;
     }
   });
-  PropertiesService.getScriptProperties().setProperty("SENT_" + today, JSON.stringify(sent));
+  props.setProperty("SENT_" + today, JSON.stringify(sent));
 }`;
 
   function getTelegramConfig() {
@@ -1786,9 +1798,6 @@ function syncScheduleToCloud(manualNotify = false, resetSent = false) {
     document.body.appendChild(form);
     form.submit();
     setTimeout(() => form.remove(), 2000);
-
-    const beacon = new Image();
-    beacon.src = `${cfg.webhookUrl}?data=${encodeURIComponent(payloadStr)}&_t=${Date.now()}`;
 
     if (manualNotify) {
       showToast(`✈️ تمت مزامنة ${allTasks.length} مهمة مع السحابة`);
@@ -2126,14 +2135,9 @@ function syncScheduleToCloud(manualNotify = false, resetSent = false) {
     showToast(`تمت الإضافة (+${cal} سعرة)`);
   }
 
-  function deleteMeal(i) {
+   function deleteMeal(i) {
     const removed = state.meals[i];
-    if (removed && removed.taskId) {
-      state.tasks[removed.taskId] = false;
-      delete state.completedAt[removed.taskId];
-      renderTasks();
-      renderNextStationCard();
-    }
+    if (removed && removed.taskId) { toggleTask(removed.taskId, false); return; }
     if (removed && removed.offsetId) {
       state.offsets = (state.offsets || []).filter(o => o.id !== removed.offsetId);
       renderOffsets();
@@ -2159,7 +2163,7 @@ function syncScheduleToCloud(manualNotify = false, resetSent = false) {
         row.className = "meal-row";
         row.innerHTML = `
           <div>
-            <div style="font-weight:700;">${m.name}</div>
+            <div style="font-weight:700;">${esc(m.name)}</div>
             <div style="font-size:11px; color:var(--muted);">${m.cal} سعرة • ${m.pro} غ بروتين</div>
           </div>
           <button class="del-btn" onclick="deleteMeal(${i})">×</button>
@@ -2387,12 +2391,12 @@ function syncScheduleToCloud(manualNotify = false, resetSent = false) {
     let rem = extra;
 
     if (rem > 0) {
-      steps.push("• <strong>الغداء:</strong> قلّل البرغل من 200غ إلى 50غ أو ألغِه (يوفّر حتى <strong>170 سعرة</strong>).");
-      rem -= 170;
+      steps.push("• <strong>الغداء:</strong> قلّل البرغل من 200غ إلى 50غ (يوفّر <strong>129 سعرة</strong>).");
+      rem -= 129;
     }
     if (rem > 0) {
-      steps.push("• <strong>المكسرات قبل النوم:</strong> ألغِ كمشة المكسرات الليلة (توفّر <strong>120 سعرة</strong>).");
-      rem -= 120;
+      steps.push("• <strong>المكسرات قبل النوم:</strong> ألغِ كمشة المكسرات الليلة (توفّر <strong>69 سعرة</strong>).");
+      rem -= 69;
     }
     if (rem > 0) {
       steps.push("• <strong>الفواكه:</strong> اكتفي بحبة فاكهة واحدة بعد الفطور وألغِ حبة العصر والعشاء (توفّر <strong>130 سعرة</strong>).");
@@ -2429,7 +2433,7 @@ function syncScheduleToCloud(manualNotify = false, resetSent = false) {
       row.style.borderRight = "3px solid var(--amber)";
       row.innerHTML = `
         <div>
-          <div style="font-weight:700;">${o.name} <span style="font-size:11px; color:var(--muted);">(${o.time})</span></div>
+          <div style="font-weight:700;">${esc(o.name)} <span style="font-size:11px; color:var(--muted);">(${o.time})</span></div>
           <div style="font-size:11px; color:var(--amber);">+${o.cal} سعرة إضافية</div>
         </div>
         <button class="del-btn" onclick="deleteOffset('${o.id}')">×</button>
@@ -2443,7 +2447,7 @@ function syncScheduleToCloud(manualNotify = false, resetSent = false) {
     const dump = {};
     for (let i = 0; i < localStorage.length; i++) {
       const k = localStorage.key(i);
-      if (k && k.startsWith("aburaslan_")) {
+      if (k && k.startsWith("aburaslan_") && k !== "aburaslan_tg_cfg") {
         dump[k] = localStorage.getItem(k);
       }
     }
@@ -2468,7 +2472,7 @@ function syncScheduleToCloud(manualNotify = false, resetSent = false) {
         const data = JSON.parse(evt.target.result);
         let count = 0;
         Object.keys(data).forEach(k => {
-          if (k.startsWith("aburaslan_")) {
+          if (k.startsWith("aburaslan_") && k !== "aburaslan_tg_cfg") {
             localStorage.setItem(k, data[k]);
             count++;
           }
