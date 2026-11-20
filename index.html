@@ -1267,13 +1267,14 @@
     editingTaskId = null;
   }
 
-  function saveEditedTime() {
+ function saveEditedTime() {
     if (!editingTaskId) return;
     const val = document.getElementById("editTimeInput").value;
     if (val) {
       const newMins = hhmmToMins(val);
       state.manualTimeSet[editingTaskId] = true;
       shiftTaskAndFollowing(editingTaskId, newMins, true);
+      syncScheduleToCloud(false, true);
 
       const t = getActiveProgram().tasks.find(x => x.id === editingTaskId);
       if (t && t.lock && state.tasks[editingTaskId]) {
@@ -1727,7 +1728,7 @@ function checkAlarms() {
       .catch(() => showToast("⚠️ تعذّر الاتصال بتيليغرام"));
   }
 
- function syncScheduleToCloud(manualNotify = false) {
+function syncScheduleToCloud(manualNotify = false, resetSent = false) {
     if (!isViewingToday()) return;
     const cfg = getTelegramConfig();
     if (!cfg.botToken || !cfg.chatId || !cfg.webhookUrl) {
@@ -1752,22 +1753,46 @@ function checkAlarms() {
       .filter(t => !!state.tasks[t.id])
       .map(t => t.id);
 
-    fetch(cfg.webhookUrl, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain" },
-      body: JSON.stringify({
-        date: currentTodayStr,
-        botToken: cfg.botToken,
-        chatId: cfg.chatId,
-        tasks: allTasks,
-        completedIds: completedIds
-      })
-    }).then(() => {
-      if (manualNotify) showToast(`✈️ تمت مزامنة ${allTasks.length} مهمة مع السحابة`);
-    }).catch(() => {
-      if (manualNotify) showToast("⚠️ فشل الاتصال بالسحابة — تحقق من الإنترنت والرابط");
+    const payloadStr = JSON.stringify({
+      date: currentTodayStr,
+      botToken: cfg.botToken,
+      chatId: cfg.chatId,
+      tasks: allTasks,
+      completedIds: completedIds,
+      resetSent: resetSent || manualNotify
     });
+
+    let frame = document.getElementById("tgHiddenSyncFrame");
+    if (!frame) {
+      frame = document.createElement("iframe");
+      frame.id = "tgHiddenSyncFrame";
+      frame.name = "tgHiddenSyncFrame";
+      frame.style.display = "none";
+      document.body.appendChild(frame);
+    }
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = cfg.webhookUrl;
+    form.target = "tgHiddenSyncFrame";
+    form.style.display = "none";
+
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "data";
+    input.value = payloadStr;
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => form.remove(), 2000);
+
+    const beacon = new Image();
+    beacon.src = `${cfg.webhookUrl}?data=${encodeURIComponent(payloadStr)}&_t=${Date.now()}`;
+
+    if (manualNotify) {
+      showToast(`✈️ تمت مزامنة ${allTasks.length} مهمة مع السحابة`);
+    }
   }
 
   // Audio & Repeating Alarm System
