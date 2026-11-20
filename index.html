@@ -200,7 +200,9 @@
   <div class="modal-card" style="border-color: var(--blue);">
     <div class="modal-title" id="waterEditTitle">تعديل كمية الماء (مل)</div>
     <div class="modal-desc">اختر الكمية التي شربتها فعلياً في هذه المحطة:</div>
-    <div class="preset-ml-grid">
+    <div class="preset-ml-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <button class="btn btn-blue" onclick="setQuickWaterVal(50)">50 مل</button>
+      <button class="btn btn-blue" onclick="setQuickWaterVal(100)">100 مل</button>
       <button class="btn btn-blue" onclick="setQuickWaterVal(150)">150 مل</button>
       <button class="btn btn-blue" onclick="setQuickWaterVal(200)">200 مل</button>
       <button class="btn btn-blue" onclick="setQuickWaterVal(250)">250 مل</button>
